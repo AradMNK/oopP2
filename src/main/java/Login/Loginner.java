@@ -3,6 +3,10 @@ package Login;
 import Objects.User;
 import TextController.TextController;
 import Builder.UserBuilder;
+import graphics.app.AppManager;
+import javafx.scene.control.Alert;
+
+import java.io.IOException;
 
 public class Loginner {
     public static LoginState loginState = LoginState.SIGN_OUT;
@@ -50,6 +54,22 @@ public class Loginner {
             TextController.println("Successfully loginned as " + user);
         } else
             TextController.println("Could not match the credentials.");
+    }
+
+    public static void attemptLoginGraphical(String user, String pass) throws IOException {
+        if (!Database.Loader.usernameExists(user)){
+            graphics.app.AppManager.alert(Alert.AlertType.ERROR, "Username not found...", "Check for spelling errors " +
+                    "because usernames are case-sensitive.", "Not found!");
+            return;
+        }
+
+        if (Database.Loader.loginMatch(user, Hasher.hash(pass))){ //login successful?
+            loginState = LoginState.getLoginState(user);
+            loginnedUser = UserBuilder.getUserFromDatabaseFull(user);
+            AppManager.launchMain();
+        } else
+            graphics.app.AppManager.alert(Alert.AlertType.ERROR, "Incorrect password...", "Check for spelling errors " +
+                    "because usernames are case-sensitive.", "Wrong password!");
     }
 
     public static void signout() {
