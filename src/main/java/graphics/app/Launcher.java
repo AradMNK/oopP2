@@ -45,6 +45,6 @@ public class Launcher extends Application {
             tryToConnect();
             return;
         }
-        TextController.println("Successfully connected to database. You can now use commands. Try /" + CommandType.HELP);
+        TextController.println("Successfully connected to database.");
     }
 }

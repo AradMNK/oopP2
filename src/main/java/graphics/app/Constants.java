@@ -5,5 +5,6 @@ public class Constants {
     APP_TITLE = "Instakilogram",
     LOGIN_FXML_PATH = "Login.fxml",
     LIGHT_MODE_CSS_PATH = "Light.css",
-    DARK_MODE_CSS_PATH = "Dark.css";
+    DARK_MODE_CSS_PATH = "Dark.css",
+    ICON_PATH = "instakilogram.png";
 }

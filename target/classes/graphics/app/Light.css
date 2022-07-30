@@ -167,7 +167,7 @@
 }
 .button:focused:hover:pressed, .button:armed,
 .button:default:focused:hover:pressed, .button:default:armed {
-    -fx-background-color: #2E0249,#2E0249, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to top,#ada1c9 0%,#a282bd 100%);
+    -fx-background-color: #2E0249,#2E0249, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#ada1c9 0%,#a282bd 100%);
     -fx-background-insets: -0.4,1,2,3;   
 }
 /*******************************************************************************

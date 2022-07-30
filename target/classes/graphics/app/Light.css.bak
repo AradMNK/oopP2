@@ -134,7 +134,7 @@
     -fx-background-color: transparent,#2E0249, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: 0,1,2,3;
     -fx-background-radius: 30;
-	-fx-font-size: 140%;
+	-fx-font-size: 200%;
     -fx-padding: 4 15 5 15;
 }
 .button:focused {	
