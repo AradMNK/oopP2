@@ -18,7 +18,11 @@ import java.util.Scanner;
 public class TextController {
     public static final Scanner scanner = new Scanner(System.in);
 
-    public static String getLine(){return scanner.nextLine();}
+    public static String getLine(){
+        String line = scanner.nextLine();
+        if (line.equals("")) return getLine();
+        return line;
+    }
     public static String getNext(){return scanner.next();}
 
     private static void actOnCommand(Command command){

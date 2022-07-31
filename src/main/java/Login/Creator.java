@@ -3,6 +3,8 @@ package Login;
 import Objects.User;
 import Objects.UserType;
 import TextController.*;
+import graphics.app.AppManager;
+import javafx.scene.control.Alert;
 
 import java.time.LocalDate;
 
@@ -73,5 +75,25 @@ public class Creator {
 
         TextController.getLine();
         TextController.println("Successfully created user.");
+    }
+
+    public static boolean attemptCreateGraphical(String username, String password,
+                                              String name, int questionID, String answer, String type){
+        if (Database.Loader.usernameExists(username)){
+            graphics.app.AppManager.alert(Alert.AlertType.ERROR, "Username already picked!",
+                    "Please choose another username " +
+                    "because usernames must be unique.", "Username exists!");
+            return false;
+        }
+
+        if (username.contains(",")){
+            AppManager.alert(Alert.AlertType.ERROR, "Illegal character \",\"!",
+                    "You cannot have commas in your username.", "Your username had a \",\"...");
+            return false;
+        }
+
+        Database.Saver.saveLogin(username, Hasher.hash(password), name, LocalDate.now(),
+                type, questionID, Hasher.hash(answer));
+        return true;
     }
 }

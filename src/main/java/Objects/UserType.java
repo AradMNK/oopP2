@@ -7,6 +7,8 @@ public enum UserType {
 
     UserType(String s){label = s;}
 
+    public static UserType[] getValues() { return values();}
+
     @Override
     public String toString(){
         return label;

@@ -8,10 +8,10 @@ public enum SecurityQuestion {
     HIGH_SCHOOL(3, "What high school did you attend?"),
     FOOD(4, "What was your favorite food as a child?"),
     YEAR(5, "What year was your father born?"),
-    SIBLING(6, "What is your oldest sibling’s middle name?");
+    SIBLING(6, "What is your oldest sibling named?");
 
-    private final int saverID;
-    private final String question;
+    public final int saverID;
+    public final String question;
 
     SecurityQuestion(int saverID, String question){
         this.saverID = saverID;
@@ -25,6 +25,8 @@ public enum SecurityQuestion {
         for (SecurityQuestion q : values()) if (secQuestionNum == q.saverID) return q;
         throw new SecurityQuestionException();
     }
+
+    public static SecurityQuestion[] getValues() {return values();}
 
     @Override
     public String toString(){return question;}

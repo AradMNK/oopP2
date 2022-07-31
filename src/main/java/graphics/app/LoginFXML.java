@@ -5,53 +5,41 @@ import animatefx.animation.*;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class LoginFXML {
-    @FXML
-    Hyperlink forgotMyPassword;
-    @FXML
-    TextField usernameField;
-    @FXML
-    PasswordField passwordField;
-    @FXML
-    Button loginButton, createButton;
-    @FXML
-    Label description;
+    private static final double ANIMATION_SPEED = 1.8;
+
+    @FXML Hyperlink forgotMyPassword;
+    @FXML TextField usernameField;
+    @FXML PasswordField passwordField;
+    @FXML Button loginButton, createButton;
+    @FXML Label description;
 
     public void initialize(Parent root) {
+        int delay = 5; //ms
         AnimationFX rootAnim = new SlideInUp(root);
-        rootAnim.setOnFinished(e-> usernameField.setVisible(true));
-        rootAnim.play();
-        usernameField.setVisible(false);
-        passwordField.setVisible(false);
-        loginButton.setVisible(false);
-        createButton.setVisible(false);
-        forgotMyPassword.setVisible(false);
-        description.setVisible(false);
+        rootAnim.setSpeed(ANIMATION_SPEED);
         AnimationFX usernameFX = new SlideInLeft(usernameField);
-        usernameFX.setDelay(Duration.seconds(1));
-        usernameFX.play();
-        usernameFX.setOnFinished(e-> passwordField.setVisible(true));
+        usernameFX.setSpeed(ANIMATION_SPEED);
         AnimationFX passwordFX = new SlideInLeft(passwordField);
-        passwordFX.setDelay(Duration.seconds(2));
-        passwordFX.play();
-        passwordFX.setOnFinished(e-> {loginButton.setVisible(true); createButton.setVisible(true);});
+        passwordFX.setSpeed(ANIMATION_SPEED);
         AnimationFX loginFX = new SlideInLeft(loginButton);
-        loginFX.setDelay(Duration.seconds(3));
-        loginFX.play();
-        loginFX.setOnFinished(e-> {forgotMyPassword.setVisible(true); description.setVisible(true);});
+        loginFX.setSpeed(ANIMATION_SPEED);
         AnimationFX createFX = new SlideInLeft(createButton);
-        createFX.setDelay(Duration.seconds(3));
-        createFX.play();
+        createFX.setSpeed(ANIMATION_SPEED);
         AnimationFX forgotFX = new FadeIn(forgotMyPassword);
-        forgotFX.setDelay(Duration.seconds(4));
-        forgotFX.play();
+        forgotFX.setSpeed(ANIMATION_SPEED);
         AnimationFX descriptionFX = new SlideInRight(description);
-        descriptionFX.setDelay(Duration.seconds(4));
-        descriptionFX.play();
+        descriptionFX.setSpeed(ANIMATION_SPEED);
+        rootAnim.setOnFinished(e-> {usernameFX.play(); Utility.delay(delay, () -> usernameField.setVisible(true));});
+        usernameFX.setOnFinished(e-> {passwordFX.play(); Utility.delay(delay, () -> passwordField.setVisible(true));});
+        passwordFX.setOnFinished(e-> {loginFX.play(); createFX.play();
+            Utility.delay(delay, () -> {loginButton.setVisible(true); createButton.setVisible(true);});});
+        loginFX.setOnFinished(e-> {forgotFX.play(); descriptionFX.play();
+            Utility.delay(delay, () -> {forgotMyPassword.setVisible(true); description.setVisible(true);});});
+        rootAnim.play();
     }
 
     @FXML
@@ -63,20 +51,36 @@ public class LoginFXML {
             return;
         }
 
-        if (username.contains(",")){
-            AppManager.alert(Alert.AlertType.ERROR, "Illegal character \",\"!",
-                    "You cannot have commas in your username.", "Your username had a \",\"...");
-            return;
-        }
-
         try {Loginner.attemptLoginGraphical(username, password);} catch (IOException e) {e.printStackTrace();}
     }
     @FXML
     public void create(){
-
+        AnimationFX leaveLoginFX = new SlideOutLeft(AppManager.loginStage.getScene().getRoot());
+        leaveLoginFX.play();
+        leaveLoginFX.setOnFinished(e-> AppManager.switchToCreate());
     }
     @FXML
     public void forgot(){
+        AnimationFX leaveLoginFX = new SlideOutLeft(AppManager.loginStage.getScene().getRoot());
+        leaveLoginFX.play();
+        leaveLoginFX.setOnFinished(e-> AppManager.switchToForgot());
+    }
 
+    @FXML public void hoverLogin(){new Pulse(loginButton).play();}
+    @FXML public void hoverCreate(){new Pulse(createButton).play();}
+    @FXML public void hoverForgot(){new Pulse(forgotMyPassword).play();}
+    @FXML public void hoverUser(){new Pulse(usernameField).play();}
+    @FXML public void hoverPassword(){new Pulse(passwordField).play();}
+    @FXML public void hoverDescription(){new Pulse(description).play();}
+
+    public void initializeLessAnimation(Parent root) {
+        AnimationFX rootAnim = new SlideInRight(root);
+        rootAnim.play();
+        createButton.setVisible(true);
+        loginButton.setVisible(true);
+        forgotMyPassword.setVisible(true);
+        description.setVisible(true);
+        usernameField.setVisible(true);
+        passwordField.setVisible(true);
     }
 }

@@ -206,12 +206,12 @@
     -fx-background-insets: -0.4,1,2,3;    
 }
 .toggle-button:selected {
-    -fx-background-color:transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);       
+    -fx-background-color:transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);       
     -fx-background-insets: 0,1,2,3;   
     -fx-text-fill: -fx-text-base-color; 
 }
 .toggle-button:selected:focused {    
-    -fx-background-color:#403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);
+    -fx-background-color:#403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);
     -fx-background-insets: -0.4,1,2,3;
 }
 /*******************************************************************************
@@ -248,12 +248,12 @@
     -fx-background-insets: -0.4,1,2,3;
 }
 .check-box:selected .box {
-    -fx-background-color:transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);       
+    -fx-background-color:transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);       
     -fx-background-insets: 0,1,2,3;
     -fx-padding: 4;
 }
 .check-box:selected:focused .box {
-    -fx-background-color:#403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);
+    -fx-background-color:#403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);
     -fx-background-insets: -0.4,1,2,3;
 }
 .check-box:focused:pressed .box {
@@ -305,11 +305,11 @@
     -fx-background-insets: -0.4,1,2,3,4;	
 }
 .radio-button:selected .radio {
-    -fx-background-color: transparent,#403f5c,#B7B8C8,rgb(199,214,224);       
+    -fx-background-color: transparent,#403f5c,#B7B8C8,#d0c7e0;       
     -fx-background-insets: 0,1,2,2.5;
 }
 .radio-button:selected:focused .radio {
-    -fx-background-color: #403f5c,#403f5c,#B7B8C8,rgb(199,214,224);       
+    -fx-background-color: #403f5c,#403f5c,#B7B8C8,#d0c7e0;       
     -fx-background-insets: -0.4,1,2,2.5;
 }
 .radio-button:armed .radio {
@@ -467,12 +467,12 @@
 }
 .list-view:focused .list-cell:filled:selected,
 .list-view:focused .list-cell:filled:selected:hover {
-    -fx-background-color: rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1;
 }
 .list-view:focused .list-cell:filled:focused:selected,
 .list-view:focused .list-cell:odd:filled:selected:focused:hover {
-    -fx-background-color: rgb(140,145,152), rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(140,145,152), #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1,2; 
 }
 .list-view:focused .list-cell:focused {
@@ -488,7 +488,7 @@
 }
 .list-view .list-cell:selected,
 .list-view .list-cell:odd:focused:hover {
-    -fx-background-color: rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1;
 }
 .list-view .corner {
@@ -560,7 +560,7 @@
     -fx-background-insets: 0,1,2;
 }
 .tree-view .tree-cell:filled:selected:hover {
-    -fx-background-color: rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1; 
 }
 .tree-view:focused .tree-cell:focused {
@@ -573,11 +573,11 @@
 }
 .tree-view:focused .tree-cell:filled:focused:selected,
 .tree-view:focused .tree-cell:filled:focused:selected:hover {
-    -fx-background-color: rgb(140,145,152), rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(140,145,152), #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1,2; 
 }
 .tree-cell:filled:selected:focused, .tree-cell:filled:selected {
-    -fx-background-color: rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,1;  
 }
 .tree-cell .tree-disclosure-node .arrow {
@@ -661,19 +661,19 @@
     -fx-background-insets: 0,0 1 1 1;
 }
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: rgb(143,148,153), rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(143,148,153), #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,0 1 1 1,2; 
 }
 .table-view:focused .table-row-cell:filled:selected, .table-view:row-selection .table-row-cell:filled:hover:selected {    
-    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,0 1 1 1;    
 }
 .table-view:focused .table-row-cell:filled:focused:selected:hover {    
-    -fx-background-color: rgb(143,148,153), rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(143,148,153), #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,0 1 1 1,2;     
 }
 .table-row-cell:filled:selected:focused, .table-row-cell:filled:selected {
-    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,0 1 1 1;
 }
 .table-view:row-selection .table-row-cell:filled:hover { 
@@ -681,7 +681,7 @@
     -fx-background-insets: 0,0 1 1 1;
 }
 .table-view:row-selection .table-row-cell:filled:focused:hover { 
-    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 30%,rgb(207,219,228) 50%,rgb(213,224,233) 80%);
+    -fx-background-color: rgb(143,148,153), linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 30%,#d2cfe4 50%,#d5d6e9 80%);
     -fx-background-insets: 0,0 1 1 1;
 }
 .table-view:focused .table-row-cell:filled:focused:hover {
@@ -832,62 +832,69 @@
 .combo-box-base  {    
     -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: 0,1,2,3;    
-    -fx-background-radius: 0;    
+    -fx-background-radius: 10;    
+	-fx-font-size: 150%;
     -fx-padding: 0;
+	-fx-text-align: center;
 }
 .combo-box-base:hover {
     -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
     -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .combo-box-base:focused:showing, .combo-box-base:focused:showing:hover {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,  #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .combo-box-base:focused {
     -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .combo-box-base:focused:hover {
     -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
     -fx-background-insets: -0.4,1,2,3;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .combo-box-base:focused:pressed {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,  #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .combo-box-base .arrow-button {
     -fx-background-color: #403f5c,linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: 1,2,3 3 3 2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
     -fx-padding: 6 7 6 7;
 }
 .combo-box-base:hover .arrow-button{
     -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
     -fx-background-insets: 1,2,3 3 3 2;    
+	-fx-background-radius: 5;
 }
 .combo-box-base:editable:hover .arrow-button,
 .combo-box-base:editable:focused:pressed .arrow-button {
     -fx-background-color: #403f5c,linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: 1,2,3 3 3 2;
+	-fx-background-radius: 5;
 }
 .combo-box-base:editable .arrow-button:hover{
     -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
     -fx-background-insets: 1,2,3 3 3 2;    
+	-fx-background-radius: 5;
 }
 .combo-box-base:editable:focused .arrow-button:pressed{
-    -fx-background-color: #403f5c,rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: 1,2,3 3 3 2;    
+	-fx-background-radius: 5;
 }
 .combo-box-base:focused:pressed .arrow-button,
 .combo-box-base:focused:showing .arrow-button,
 .combo-box-base:focused:showing:hover .arrow-button {
-    -fx-background-color: #403f5c,rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
-    -fx-background-insets: 1,2,3 3 3 2;    
+    -fx-background-color: #403f5c,#ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
+    -fx-background-insets: 1,2,3 3 3 2;   
+	-fx-background-radius: 5;	
 }
 .combo-box-base .arrow {    
     -fx-background-color: -fx-mark-color;
@@ -901,17 +908,17 @@
 .combo-box-base:editable .text-field {
     -fx-padding: 3 4 2 4;
     -fx-background-insets: 0,1,2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
 }
 .combo-box-base:editable:hover .text-field {
     -fx-background-color: transparent,#403f5c,#e0dff2;
     -fx-background-insets: 0,1,2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
 }
 .combo-box-base:editable .text-field:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2; 
     -fx-background-insets: -0.4, 1, 2;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
 }
 /*******************************************************************************
  *                                                                             *
@@ -939,7 +946,7 @@
     -fx-background-color:  transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
 }
 .split-menu-button:armed .label, .split-menu-button .label:pressed {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,  #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
 }
 .split-menu-button .arrow-button {
     -fx-background-color:  transparent,#403f5c,linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
@@ -952,7 +959,7 @@
     -fx-background-insets: 0, 1 1 1 0, 2 2 2 1, 3 3 3 1;
 }
 .split-menu-button .arrow-button:pressed {
-    -fx-background-color: transparent,#403f5c,rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: transparent,#403f5c,#ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: 0, 1 1 1 0, 2 2 2 1, 3 3 3 1;    
 }
 .split-menu-button .arrow {
@@ -991,38 +998,42 @@
  *                                                                             *
  ******************************************************************************/
 .choice-box {   
-    -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
+    -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
+	-fx-font-size: 150%;
     -fx-background-insets: 0,1,2,3;    
-    -fx-background-radius: 0;         
+    -fx-background-radius: 10;         
     -fx-padding: 2 6 2 2;   
+	-fx-text-align: center;
 }
 .choice-box:focused {
-    -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
+    -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .choice-box:hover {
-    -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
+    -fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
     -fx-background-insets: 0,1,2,3;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .choice-box:hover:focused {
-    -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
+    -fx-background-color: #403f5c,#403f5c, linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
     -fx-background-insets: -0.4,1,2,3;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .choice-box:showing, .choice-box:focused:showing:hover {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .choice-box:focused:pressed {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,linear-gradient(to bottom,#403f5c 0%,#9A86A4 100%), linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: -0.4,1,2,3;    
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 .choice-box .label {
     -fx-padding: 2 4 3 6;
+	-fx-background-color: transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
+	-fx-background-radius: 5;
 }
 .choice-box .open-button {
     -fx-background-color: null;
@@ -1057,7 +1068,7 @@
     -fx-background-insets: -0.4,1,2,3;
 }
 .menu-button:armed , .menu-button:focused:pressed {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,  #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: -0.4,1,2,3;    
     -fx-background-radius: 0;
 }
@@ -1181,7 +1192,7 @@
     -fx-background-insets: 0, 1, 0 3 0 0, 1 4 1 1;    
 }
 .tab:selected, .tab:selected:hover {
-    -fx-background-color: #403f5c,rgb(201,211,220), linear-gradient(to bottom,rgb(208,223,232) 0%,rgb(202,217,226) 30%,rgb(202,217,226) 50%,rgb(228,233,238) 80%);    
+    -fx-background-color: #403f5c,#ccc9dc, linear-gradient(to bottom,rgb(208,223,232) 0%,rgb(202,217,226) 30%,rgb(202,217,226) 50%,rgb(228,233,238) 80%);    
     -fx-background-insets: 0, 1 1 0 1, 2 2 0 2;
     -fx-background-radius: 6 6 0 0, 5 5 0 0, 4 4 0 0;
 }
@@ -1384,7 +1395,7 @@
     -fx-background-insets: 4,5,6,7;  
 }
 .pagination .pagination-control .bullet-button:selected {   
-    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);       
+    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);       
     -fx-background-insets: 4,5,6;
 }
 .pagination.bullet .pagination-control .left-arrow-button, .pagination.bullet .pagination-control .right-arrow-button {
@@ -1403,7 +1414,7 @@
     -fx-background-insets: 0,1,2,3;
 }
 .pagination .pagination-control .number-button:selected {   
-    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);       
+    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);       
     -fx-background-insets: 0,1,2;
 }
 .pagination .pagination-control .page-information {   
@@ -1433,11 +1444,11 @@
     -fx-padding: 10;
 }
 .titled-pane:focused > .title .arrow-button {
-    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);
+    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);
     -fx-background-insets: 4,5,6;
 }
 .titled-pane:focused > .title, .titled-pane:focused > .title:hover {
-    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);
+    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);
     -fx-background-insets: 0,1,2;    
 }
 .titled-pane > .title > .arrow-button .arrow {
@@ -1474,7 +1485,7 @@
 .accordion .titled-pane:focused > .title,
 .accordion .titled-pane:collapsed:focused > .title,
 .accordion .titled-pane:expanded:focused > .title {
-    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,rgb(209,223,233) 0%,rgb(199,214,224) 100%);
+    -fx-background-color: #403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#d7d1e9 0%,#d0c7e0 100%);
     -fx-background-insets: 0,1,2;
 }
 .accordion .titled-pane:focused {
@@ -1532,7 +1543,7 @@
     -fx-background-color:  transparent,#403f5c, linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#b4aec2 0%,#7b728f 100%);
 }
 .color-picker .split-button .label:pressed, .color-picker .split-button:showing .label {
-    -fx-background-color: #403f5c,#403f5c,  rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,  #ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
 }
 .color-picker .split-button .arrow-button {
     -fx-background-color:  transparent,#403f5c,linear-gradient(to bottom,#B7B8C8 0%,#9A86A4 100%), linear-gradient(to bottom,#C9BBCF 0%,#7b728f 100%);
@@ -1547,7 +1558,7 @@
 .color-picker .split-button .arrow-button:pressed,
 .color-picker .split-button:showing .arrow-button,
 .color-picker .split-button:showing:hover .arrow-button {
-    -fx-background-color: #403f5c,#403f5c,rgb(201,211,220), linear-gradient(to bottom,rgb(209,221,229) 0%,rgb(207,219,228) 40%,rgb(207,219,228) 60%,rgb(213,224,233) 100%);
+    -fx-background-color: #403f5c,#403f5c,#ccc9dc, linear-gradient(to bottom,#e5d1e1 0%,#d2cfe4 40%,#d2cfe4 60%,#d5d6e9 100%);
     -fx-background-insets: 0, 1 1 1 0, 2 2 2 1, 3 3 3 1;    
 }
 .color-picker .button .arrow-button .arrow {
