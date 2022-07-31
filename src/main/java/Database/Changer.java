@@ -5,31 +5,31 @@ import java.sql.SQLException;
 
 public class Changer {
     public static void removePostFromFeed(String username, int postID) {
-        Connector.queryWithoutResult("DELETE FROM feed WHERE username = \'" + username + "\' AND postID = " + postID + " AND type = \'post\';");
+        Connector.queryWithoutResult("DELETE FROM feed WHERE username = '" + username + "' AND postID = " + postID + " AND type = 'post';");
     }
 
     public static void removeCommentFromFeed(String username, int commentID) {
-        Connector.queryWithoutResult("DELETE FROM feed WHERE username = \'" + username
-                                            + "\' AND postID = " + commentID + " AND type = \'comment\';");
+        Connector.queryWithoutResult("DELETE FROM feed WHERE username = '" + username
+                                            + "' AND postID = " + commentID + " AND type = 'comment';");
     }
 
     public static void removeLikeFromFeed(String username, int handle) {
-        Connector.queryWithoutResult("DELETE FROM feed WHERE username = \'" + username
-                                            + "\' AND postID = " + handle + " AND type = \'like\';");
+        Connector.queryWithoutResult("DELETE FROM feed WHERE username = '" + username
+                                            + "' AND postID = " + handle + " AND type = 'like';");
     }
 
     public static void addViewForUser(int postID, String username) {
-        Connector.queryWithoutResult("INSERT INTO views (username, postID) VALUES (\'"
-                                            + username + "\', " + postID + ");");
+        Connector.queryWithoutResult("INSERT INTO views (username, postID) VALUES ('"
+                                            + username + "', " + postID + ");");
     }
     public static void addLikeStat(int postID, String username) {
-        Connector.queryWithoutResult("INSERT INTO likestat (username, postID) VALUES (\'"
-                                            + username + "\', " + postID + ");");
+        Connector.queryWithoutResult("INSERT INTO likestat (username, postID) VALUES ('"
+                                            + username + "', " + postID + ");");
     }
 
     public static void editMessage(int messageID, String line) {
-        Connector.queryWithoutResult("UPDATE directmessages SET message = \'" + line
-                                            + "\' WHERE messageID = " + messageID + ";");
+        Connector.queryWithoutResult("UPDATE directmessages SET message = '" + line
+                                            + "' WHERE messageID = " + messageID + ";");
     }
 
     public static void deleteMessage(int handle) {
@@ -37,8 +37,8 @@ public class Changer {
     }
 
     public static void editGroupMessage(int messageID, String line) {
-        Connector.queryWithoutResult("UPDATE groupmessages SET message = \'" + line
-                                            + "\' WHERE messageID = " + messageID + ";");
+        Connector.queryWithoutResult("UPDATE groupmessages SET message = '" + line
+                                            + "' WHERE messageID = " + messageID + ";");
     }
 
     public static void deleteGroupMessage(int handle) {
@@ -46,18 +46,18 @@ public class Changer {
     }
 
     public static void removeFromBlockList(String blocker, String blocked) {
-        Connector.queryWithoutResult("DELETE FROM blocks WHERE blocker = \'" + blocker
-                                            +"\' AND blocked = \'" + blocked + "\';");
+        Connector.queryWithoutResult("DELETE FROM blocks WHERE blocker = '" + blocker
+                                            +"' AND blocked = '" + blocked + "';");
     }
 
     public static void removeFromFollowers(String follower, String followed) {
-        Connector.queryWithoutResult("DELETE FROM follow WHERE follower = \'" + follower
-                                            + "\' AND followed = \'" + followed + "\';");
+        Connector.queryWithoutResult("DELETE FROM follow WHERE follower = '" + follower
+                                            + "' AND followed = '" + followed + "';");
     }
 
     public static void removeLike(int postID, String username) {
-        Connector.queryWithoutResult("DELETE FROM likes WHERE username = \'"
-                                            + username + "\' AND postID = " + postID + ";");
+        Connector.queryWithoutResult("DELETE FROM likes WHERE username = '"
+                                            + username + "' AND postID = " + postID + ";");
     }
 
     public static void removeGroup(int groupID) {
@@ -65,7 +65,7 @@ public class Changer {
     }
 
     public static void changeGroupJoiner(int handle, String newID) {
-        Connector.queryWithoutResult("UPDATE groups SET joinID = \'" + newID +"\' WHERE groupID = " + handle + ";");
+        Connector.queryWithoutResult("UPDATE groups SET joinID = '" + newID +"' WHERE groupID = " + handle + ";");
     }
 
     public static void addUserToGroup(String username, int handle) {
@@ -84,8 +84,8 @@ public class Changer {
 
                 //adds the member to the group
                 members = (members + "," + username);
-                Connector.queryWithoutResult("UPDATE groups SET members = \'" + members
-                                                    +"\' WHERE groupID = " + handle + ";");
+                Connector.queryWithoutResult("UPDATE groups SET members = '" + members
+                                                    +"' WHERE groupID = " + handle + ";");
             }
         }
         catch (SQLException e) {e.printStackTrace();}
@@ -120,8 +120,8 @@ public class Changer {
                 members = members.replaceAll(",,", ",");
 
                 //removes the member from group
-                Connector.queryWithoutResult("UPDATE groups SET members = \'" + members
-                                                    + "\' WHERE groupID = " + handle + ";");
+                Connector.queryWithoutResult("UPDATE groups SET members = '" + members
+                                                    + "' WHERE groupID = " + handle + ";");
             }
         }
         catch (SQLException e) {e.printStackTrace();}
@@ -156,8 +156,8 @@ public class Changer {
                 banned = banned.replaceAll(",,", ",");
 
                 //removes the member from group
-                Connector.queryWithoutResult("UPDATE groups SET banList = \'" + banned
-                                                    + "\' WHERE groupID = " + handle + ";");
+                Connector.queryWithoutResult("UPDATE groups SET banList = '" + banned
+                                                    + "' WHERE groupID = " + handle + ";");
             }
         }
         catch (SQLException e) {e.printStackTrace();}
@@ -165,16 +165,16 @@ public class Changer {
     }
 
     public static void changePassword(String username, String hash) {
-        Connector.queryWithoutResult("UPDATE users SET hashPass = \'" + hash + "\' WHERE username = \'" + username + "\';");
+        Connector.queryWithoutResult("UPDATE users SET hashPass = '" + hash + "' WHERE username = '" + username + "';");
     }
 
     public static void userSees(String username, int groupID) {
-        Connector.queryWithoutResult("DELETE FROM unreadgroups WHERE forUsername = \'"
-                                            + username + "\' AND groupID = " + groupID +";");
+        Connector.queryWithoutResult("DELETE FROM unreadgroups WHERE forUsername = '"
+                                            + username + "' AND groupID = " + groupID +";");
     }
 
     public static void userSees(String forUsername, String usernameSender) {
-        Connector.queryWithoutResult("DELETE FROM unreadusers WHERE forUsername = \'"
-                                            + forUsername + "\' AND username = \'" + usernameSender +"\';");
+        Connector.queryWithoutResult("DELETE FROM unreadusers WHERE forUsername = '"
+                                            + forUsername + "' AND username = '" + usernameSender +"';");
     }
 }
