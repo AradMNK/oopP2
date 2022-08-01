@@ -1246,27 +1246,192 @@ public class Loader {
         return messageIDs;
     }
 
-    public static int[] getMessageIDsOfUsers(String username, String username1, int howMany) {
-        return new int[1];
+    public static int[] getMessageIDsOfUsers(String username1, String username2, int howMany) {
+        //declares an array for the messages
+        int[] messageIDs = new int[howMany];
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE (sender = '"
+                                                        + username1 + "' AND receiver = '" + username2
+                                                        + "') OR (sender = '" + username1 + "' AND receiver = '"
+                                                        + username2 + "') ORDER BY messageID DESC LIMIT "
+                                                        + howMany + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                for (int i = howMany - 1; i >= 0; i--){
+                    messageIDs[i] = resultSet.getInt(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
     }
 
     public static String[] getGroupMessageDetails(int groupMessageID) {
-        return new String[1];
+        //declares a string array to store the details
+        String[] details = new String[5];
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT groupID, sender, message, date, originalSender "
+                                                        + "FROM users WHERE messageID = " + groupMessageID
+                                                        + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                for (int i = 0; i < 5; i++){
+                    details[i] = resultSet.getString(i+1);
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return details;
     }
 
     public static String[] getMessageDetails(int messageID) {
-        return new String[2];
+        //declares a string array to store the details
+        String[] details = new String[5];
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT sender, receiver, message, date, originalSender " +
+                                                        "FROM directmessages WHERE messageID = " + messageID
+                                                        + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                for (int i = 0; i < 5; i++){
+                    details[i] = resultSet.getString(i+1);
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return details;
     }
 
     public static int[] getPostFeed(String username) {
-        return new int[1];
+        //declares an array for the postIDs
+        int[] posts = new int[0];
+
+        //declares the number of the posts
+        int postCount;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
+                                                        + "' AND type = 'post';").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                postCount = resultSet.getInt(1);
+
+                if (postCount != 0) {
+                    //declares the array
+                    posts = new int[postCount];
+
+                    //saves the posts
+                    resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
+                                                                + "' AND type = 'post';").executeQuery();
+                    resultSet.next();
+                    for (int i = 0; i < postCount; i++){
+                        posts[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return posts;
     }
 
     public static int[] getLikeFeed(String username) {
-        return new int[1];
+        //declares an array for the likeIDs
+        int[] likes = new int[0];
+
+        //declares the number of the likes
+        int likeCount;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
+                                                        + "' AND type = 'like';").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                likeCount = resultSet.getInt(1);
+
+                if (likeCount != 0) {
+                    //declares the array
+                    likes = new int[likeCount];
+
+                    //saves the posts
+                    resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
+                            +                                    "' AND type = 'like';").executeQuery();
+                    resultSet.next();
+                    for (int i = 0; i < likeCount; i++){
+                        likes[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return likes;
     }
 
     public static int[] getCommentFeed(String username) {
-        return new int[1];
+        //declares an array for the commentIDs
+        int[] comments = new int[0];
+
+        //declares the number of the posts
+        int commentCount;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
+                                                        + "' AND type = 'comment';").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                commentCount = resultSet.getInt(1);
+
+                if (commentCount != 0) {
+                    //declares the array
+                    comments = new int[commentCount];
+
+                    //saves the posts
+                    resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
+                                                                + "' AND type = 'comment';").executeQuery();
+                    resultSet.next();
+                    for (int i = 0; i < commentCount; i++){
+                        comments[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return comments;
     }
 }
