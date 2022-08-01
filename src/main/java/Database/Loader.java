@@ -1068,4 +1068,8 @@ public class Loader {
         finally {Connector.connector.disconnect();}
         return users;
     }
+
+    public static int[] getPostComments(int postID) {
+        return new int[1];
+    }
 }

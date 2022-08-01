@@ -40,7 +40,7 @@ public class UserBuilder {
     public static User getUserFromDatabaseWithPosts(String username){
         User user = getUserFromDatabaseDetailsOnly(username);
         int[] postIDs = Database.Loader.getUserPosts(username);
-        for (int postID: postIDs) user.getPosts().add(PostBuilder.getPostFromDatabaseWithComments(postID));
+        for (int postID: postIDs) user.getPosts().add(PostBuilder.getPostFromDatabaseWithComments(postID, user));
         return user;
     }
 
