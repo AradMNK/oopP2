@@ -1070,7 +1070,9 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM groups "
                                                         + "INNER JOIN groupmessages ON groups.groupID = groupmessages.groupID "
-                                                        + "WHERE groupmessage.message LIKE '%" + pattern
+                                                        + "WHERE (groups.members LIKE '" + username + ",%' OR '%,"
+                                                        + username + "' OR '%," + username + ",%'" + "OR '" + username
+                                                        + "') AND groupmessage.message LIKE '%" + pattern
                                                         + "%';").executeQuery();
 
             //checks if the resultSet is empty
