@@ -156,6 +156,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < numberOfLikes; i++) {
                         likerUsernames[i] = resultSet.getString(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -466,6 +467,9 @@ public class Loader {
     }
 
     public static String getPostPoster(int postID) {
+        //declares the post poster
+        String postPoster = "";
+
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
@@ -474,12 +478,12 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 resultSet.next();
-                return resultSet.getString(1);
+                postPoster = resultSet.getString(1);
             }
         }
         catch (SQLException e) {e.printStackTrace();}
         finally {Connector.connector.disconnect();}
-        return "";
+        return postPoster;
     }
 
     public static HashSet<Integer> getLikedAds(String username) {
@@ -593,6 +597,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < numberOfUsers; i++) {
                         unreadUsers[i] = resultSet.getString(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -631,6 +636,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < numberOfGroups; i++) {
                         unreadGroups[i] = resultSet.getInt(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -711,6 +717,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < blockedCount; i++) {
                         blockList[i] = resultSet.getString(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -749,6 +756,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < followerCount; i++) {
                         followers[i] = resultSet.getString(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -787,6 +795,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < followingCount; i++) {
                         followings[i] = resultSet.getString(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -825,6 +834,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < postCount; i++) {
                         posts[i] = resultSet.getInt(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -865,6 +875,7 @@ public class Loader {
                     resultSet.next();
                     for (int i = 0; i < groupCount; i++) {
                         groups[i] = resultSet.getInt(1);
+                        resultSet.next();
                     }
                 }
             }
@@ -934,24 +945,29 @@ public class Loader {
                                                         + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
                                                         + username2 + "' AND receiver = '" + username1
                                                         + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
-            resultSet.next();
 
             //checks if the resultSet is empty
-            if (resultSet.getInt(1) != 0){
-                //declares the array
-                messageIDs = new int[numberOfResults];
-
-                //adds the IDs to the array
-                resultSet = null;
-                resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE ((sender = '"
-                                                        + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
-                                                        + username2 + "' AND receiver = '" + username1
-                                                        + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
-
+            if (resultSet.next()) {
                 resultSet.next();
-                for (int i = 0; i < numberOfResults; i++){
-                    messageIDs[i] = resultSet.getInt(1);
+                numberOfResults = resultSet.getInt(1);
+
+                //checks if the resultSet is empty
+                if (resultSet.getInt(1) != 0) {
+                    //declares the array
+                    messageIDs = new int[numberOfResults];
+
+                    //adds the IDs to the array
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE ((sender = '"
+                            + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
+                            + username2 + "' AND receiver = '" + username1
+                            + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
+
                     resultSet.next();
+                    for (int i = 0; i < numberOfResults; i++) {
+                        messageIDs[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
                 }
             }
         }
@@ -973,23 +989,27 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
                                                         + groupID + " AND members LIKE '%" + username
                                                         + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
-            resultSet.next();
-
             //checks if the resultSet is empty
-            if (resultSet.getInt(1) != 0){
-                //declares the array
-                messageIDs = new int[numberOfResults];
-
-                //adds the IDs to the array
-                resultSet = null;
-                resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
-                                                            + groupID + " AND members LIKE '%" + username
-                                                            + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
-
+            if (resultSet.next()) {
                 resultSet.next();
-                for (int i = 0; i < numberOfResults; i++){
-                    messageIDs[i] = resultSet.getInt(1);
+                numberOfResults = resultSet.getInt(1);
+
+                //checks if the resultSet is empty
+                if (resultSet.getInt(1) != 0) {
+                    //declares the array
+                    messageIDs = new int[numberOfResults];
+
+                    //adds the IDs to the array
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
+                            + groupID + " AND members LIKE '%" + username
+                            + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
+
                     resultSet.next();
+                    for (int i = 0; i < numberOfResults; i++) {
+                        messageIDs[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
                 }
             }
         }
@@ -998,7 +1018,7 @@ public class Loader {
         return messageIDs;
     }
 
-    public static int[] searchAllMessages (String username, String pattern){ //FIXME AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    public static int[] searchDirects (String username, String pattern){
         //declares an array for the messages found in the group chat
         int[] messageIDs = new int[0];
 
@@ -1008,22 +1028,76 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet = null;
         try {
-            resultSet = connection.prepareStatement("").executeQuery();
-            resultSet.next();
+            resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM direcrmessages WHERE (sender ='"
+                                                        + username + "' OR receiver = '" + username
+                                                        + "') AND message LIKE '%" + pattern + "%';").executeQuery();
 
             //checks if the resultSet is empty
-            if (resultSet.getInt(1) != 0){
-                //declares the array
-                messageIDs = new int[numberOfResults];
-
-                //adds the IDs to the array
-                resultSet = null;
-                resultSet = connection.prepareStatement("").executeQuery();
-
+            if (resultSet.next()) {
                 resultSet.next();
-                for (int i = 0; i < numberOfResults; i++){
-                    messageIDs[i] = resultSet.getInt(1);
+                numberOfResults = resultSet.getInt(1);
+
+                //checks if the resultSet is empty
+                if (resultSet.getInt(1) != 0) {
+                    //declares the array
+                    messageIDs = new int[numberOfResults];
+
+                    //adds the IDs to the array
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT messageID FROM direcrmessages WHERE (sender ='"
+                                                                + username + "' OR receiver = '" + username
+                                                                + "') AND message LIKE '%" + pattern + "%';").executeQuery();
+
                     resultSet.next();
+                    for (int i = 0; i < numberOfResults; i++) {
+                        messageIDs[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
+    }
+
+    public static int[] searchGroups (String username, String pattern){
+        //declares an array for the messages found in the group chat
+        int[] messageIDs = new int[0];
+
+        //declares the number of the results
+        int numberOfResults = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM groups "
+                                                        + "INNER JOIN groupmessages ON groups.groupID = groupmessages.groupID "
+                                                        + "WHERE groupmessage.message LIKE '%" + pattern
+                                                        + "%';").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()) {
+                resultSet.next();
+                numberOfResults = resultSet.getInt(1);
+
+                //checks if the resultSet is empty
+                if (resultSet.getInt(1) != 0) {
+                    //declares the array
+                    messageIDs = new int[numberOfResults];
+
+                    //adds the IDs to the array
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM groups INNER JOIN "
+                                                                + "groupmessages ON groups.groupID = groupmessages.groupID "
+                                                                + "WHERE groupmessage.message LIKE '%" + pattern
+                                                                + "%';").executeQuery();
+
+                    resultSet.next();
+                    for (int i = 0; i < numberOfResults; i++) {
+                        messageIDs[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
                 }
             }
         }
@@ -1044,23 +1118,28 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(username) FROM users WHERE username LIKE '%"
                                                         + pattern + "%' OR name LIKE '%" + pattern + "%';").executeQuery();
-            resultSet.next();
 
             //checks if the resultSet is empty
-            if (resultSet.getInt(1) != 0){
-                //declares the array
-                users = new String[numberOfResults];
-
-                //adds the IDs to the array
-                resultSet = null;
-                resultSet = connection.prepareStatement("SELECT username FROM users WHERE username LIKE '%"
-                                                            + pattern + "%' OR name LIKE '%"
-                                                            + pattern + "%';").executeQuery();
-
+            if (resultSet.next()) {
                 resultSet.next();
-                for (int i = 0; i < numberOfResults; i++){
-                    users[i] = resultSet.getString(1);
+                numberOfResults = resultSet.getInt(1);
+
+                //checks if the resultSet is empty
+                if (numberOfResults != 0) {
+                    //declares the array
+                    users = new String[numberOfResults];
+
+                    //adds the IDs to the array
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT username FROM users WHERE username LIKE '%"
+                                                                + pattern + "%' OR name LIKE '%"
+                                                                + pattern + "%';").executeQuery();
+
                     resultSet.next();
+                    for (int i = 0; i < numberOfResults; i++) {
+                        users[i] = resultSet.getString(1);
+                        resultSet.next();
+                    }
                 }
             }
         }
@@ -1070,6 +1149,41 @@ public class Loader {
     }
 
     public static int[] getPostComments(int postID) {
-        return new int[1];
+        //declares an array for the commentIDs
+        int[] comments = new int[0];
+
+        //declares the number of the comments
+        int commentCount = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(commentID) FROM comments WHERE postID = "
+                                                        + postID + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                commentCount = resultSet.getInt(1);
+
+                if (commentCount != 0) {
+                    //declares the array
+                    comments = new int[commentCount];
+
+                    //saves the comments
+                    resultSet = null;
+                    resultSet = connection.prepareStatement("SELECT COUNT(commentID) FROM comments WHERE postID = "
+                                                                + postID + ";").executeQuery();
+                    resultSet.next();
+                    for (int i = 0; i < commentCount; i++){
+                        comments[i] = resultSet.getInt(1);
+                        resultSet.next();
+                    }
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return comments;
     }
 }
