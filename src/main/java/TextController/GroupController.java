@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class GroupController {
-    final static int replyShowNum = 10, notReplyID = 0;
+    final static int replyShowNum = 10, notReplyID = 0, showMessagesIncrement = 10;
+    static int showMessages = 10;
     final static String inReplyTo = "In reply to: ", ellipsis = "...";
     public static Group group;
 
@@ -249,7 +250,7 @@ public class GroupController {
     }
 
     private static void refresh() {
-        group = GroupBuilder.getGroupFromDatabaseFull(group.getGroupID().getHandle());
+        group = GroupBuilder.getGroupFromDatabaseFull(group.getGroupID().getHandle(), showMessages);
         showPreviousChats();
     }
 
@@ -287,7 +288,7 @@ public class GroupController {
         try {parsed = Integer.parseInt(TextController.getNext());} catch (NumberFormatException e) {
             TextController.println("Please enter a valid number."); showGroups(); return;}
         if (groupIDs.contains(parsed)) {
-            attemptEntrance(GroupBuilder.getGroupFromDatabaseFull(parsed));
+            attemptEntrance(GroupBuilder.getGroupFromDatabaseFull(parsed, showMessages));
         }
     }
 }

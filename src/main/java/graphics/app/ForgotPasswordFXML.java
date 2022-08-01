@@ -6,9 +6,11 @@ import animatefx.animation.*;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 
 public class ForgotPasswordFXML {
     private String username;
+    ImageView imageView;
     @FXML TextField usernameField, answerField;
     @FXML PasswordField passwordField;
     @FXML Button changeButton, backButton, applyButton, checkButton;
@@ -20,7 +22,7 @@ public class ForgotPasswordFXML {
         Utility.delay(50, () -> root.setVisible(true));
     }
 
-    @FXML public void change(){
+    @FXML public void change() {
         String password = passwordField.getText();
         if (password.equals("")){
             AppManager.alert(Alert.AlertType.ERROR, "You cannot have an empty password!",
@@ -37,7 +39,7 @@ public class ForgotPasswordFXML {
         leaveCreateAccountFX.setOnFinished(e-> AppManager.switchToLogin());
         leaveCreateAccountFX.play();
     }
-    @FXML public void check(){
+    @FXML public void check() {
         String answer = answerField.getText();
         if (!Database.Loader.doesSecurityQuestionAnswerMatch(username, Hasher.hash(answer))){
             AppManager.alert(Alert.AlertType.ERROR, "Answer does not match-up with the question answered.",
@@ -51,15 +53,16 @@ public class ForgotPasswordFXML {
 
         securityQuestionShower.setDisable(true);
         answerField.setDisable(true);
+        checkButton.setDisable(true);
         passwordField.setDisable(false);
         changeButton.setDisable(false);
     }
-    @FXML public void back(){
+    @FXML public void back() {
         AnimationFX leaveCreateAccountFX = new SlideOutLeft(AppManager.loginStage.getScene().getRoot());
         leaveCreateAccountFX.setOnFinished(e-> AppManager.switchToLogin());
         leaveCreateAccountFX.play();
     }
-    @FXML public void apply(){
+    @FXML public void apply() {
         username = usernameField.getText();
         if (username.equals("")){
             AppManager.alert(Alert.AlertType.ERROR, "Are you seriously searching for an empty username?",
@@ -81,17 +84,18 @@ public class ForgotPasswordFXML {
                 (Database.Loader.getSecurityQuestionNumber(username)).toString());
         securityQuestionShower.setDisable(false);
         answerField.setDisable(false);
+        checkButton.setDisable(false);
         passwordField.setDisable(true);
         changeButton.setDisable(true);
     }
 
 
-    @FXML public void hoverBack(){new Pulse(backButton).play();}
-    @FXML public void hoverChange(){new Pulse(changeButton).play();}
-    @FXML public void hoverApply(){new Pulse(applyButton).play();}
-    @FXML public void hoverCheck(){new Pulse(checkButton).play();}
-    @FXML public void hoverUser(){new Pulse(usernameField).play();}
-    @FXML public void hoverPassword(){new Pulse(passwordField).play();}
-    @FXML public void hoverAnswer(){new Pulse(answerField).play();}
-    @FXML public void hoverQuestion(){new Pulse(securityQuestionShower).play();}
+    @FXML public void hoverBack() {new Pulse(backButton).play();}
+    @FXML public void hoverChange() {new Pulse(changeButton).play();}
+    @FXML public void hoverApply() {new Pulse(applyButton).play();}
+    @FXML public void hoverCheck() {new Pulse(checkButton).play();}
+    @FXML public void hoverUser() {new Pulse(usernameField).play();}
+    @FXML public void hoverPassword() {new Pulse(passwordField).play();}
+    @FXML public void hoverAnswer() {new Pulse(answerField).play();}
+    @FXML public void hoverQuestion() {new Pulse(securityQuestionShower).play();}
 }

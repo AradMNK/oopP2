@@ -26,8 +26,32 @@ public class AppManager {
 
         stage.show();
         ((LoginFXML)fxmlLoader.getController()).initialize(scene.getRoot());
-        stage.requestFocus();
+        //stage.requestFocus();
         stage.show();
+    }
+
+    public static void switchToCreate(){
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.CREATE_FXML_PATH));
+        try {loginStage.getScene().setRoot(fxmlLoader.load());}
+        catch (IOException e) {e.printStackTrace(); return;}
+        loginStage.getScene().getRoot().setVisible(false);
+
+        ((CreateAccountFXML)fxmlLoader.getController()).initialize(loginStage.getScene().getRoot());
+    }
+    public static void switchToLogin() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.LOGIN_FXML_PATH));
+        try {loginStage.getScene().setRoot(fxmlLoader.load());}
+        catch (IOException e) {e.printStackTrace(); return;}
+
+        ((LoginFXML)fxmlLoader.getController()).initializeLessAnimation(loginStage.getScene().getRoot());
+    }
+    public static void switchToForgot() {
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.FORGOT_FXML_PATH));
+        try {loginStage.getScene().setRoot(fxmlLoader.load());}
+        catch (IOException e) {e.printStackTrace(); return;}
+        loginStage.getScene().getRoot().setVisible(false);
+
+        ((ForgotPasswordFXML)fxmlLoader.getController()).initialize(loginStage.getScene().getRoot());
     }
 
     public static void launchMain() throws IOException {
@@ -49,34 +73,6 @@ public class AppManager {
         mainStage.requestFocus();
         mainStage.show();
     }
-
-    public static void switchToCreate(){
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.CREATE_FXML_PATH));
-        try {loginStage.getScene().setRoot(fxmlLoader.load());}
-        catch (IOException e) {e.printStackTrace(); return;}
-        loginStage.getScene().getRoot().setVisible(false);
-
-        ((CreateAccountFXML)fxmlLoader.getController()).initialize(loginStage.getScene().getRoot());
-    }
-
-    public static void switchToLogin() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.LOGIN_FXML_PATH));
-        try {loginStage.getScene().setRoot(fxmlLoader.load());}
-        catch (IOException e) {e.printStackTrace(); return;}
-
-        ((LoginFXML)fxmlLoader.getController()).initializeLessAnimation(loginStage.getScene().getRoot());
-    }
-
-    public static void switchToForgot() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.FORGOT_FXML_PATH));
-        try {loginStage.getScene().setRoot(fxmlLoader.load());}
-        catch (IOException e) {e.printStackTrace(); return;}
-        loginStage.getScene().getRoot().setVisible(false);
-
-        ((ForgotPasswordFXML)fxmlLoader.getController()).initialize(loginStage.getScene().getRoot());
-    }
-
-
 
 
 

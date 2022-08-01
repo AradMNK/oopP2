@@ -14,13 +14,16 @@ public class PostBuilder {
     }
 
     public static Post getPostFromDatabaseWithComments(int postID) {
-        return new Post();
+        Post post = getPostFromDatabase(postID);
+        int[] commentIDs = Database.Loader.getPostComments(postID);
+        for (int commentID: commentIDs) post.getComments().add(CommentBuilder.getCommentFromDatabase(commentID, post));
+        return post;
     }
 
     public static Post getPostFromDatabaseWithComments(int postID, User poster) {
         Post post = getPostFromDatabase(postID, poster);
         int[] commentIDs = Database.Loader.getPostComments(postID);
-
+        for (int commentID: commentIDs) post.getComments().add(CommentBuilder.getCommentFromDatabase(commentID, post));
         return post;
     }
 

@@ -1186,4 +1186,16 @@ public class Loader {
         finally {Connector.connector.disconnect();}
         return comments;
     }
+
+    public static String getGroupJoiner(int groupID) {
+        return "";
+    }
+
+    public static String getGroupOwner(int groupID) {
+        return "";
+    }
+
+    public static int[] getGroupMessageIDsOfGroup(int groupID, int howMany) {
+        return new int[howMany];
+    }
 }
