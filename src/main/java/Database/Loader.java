@@ -919,4 +919,153 @@ public class Loader {
         finally {Connector.connector.disconnect();}
         return details;
     }
+
+    public static int[] searchInDirect (String username1, String username2, String pattern){
+        //declares an array for the messages found in the direct
+        int[] messageIDs = new int[0];
+
+        //declares the number of the results
+        int numberOfResults = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM directmessages WHERE ((sender = '"
+                                                        + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
+                                                        + username2 + "' AND receiver = '" + username1
+                                                        + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
+            resultSet.next();
+
+            //checks if the resultSet is empty
+            if (resultSet.getInt(1) != 0){
+                //declares the array
+                messageIDs = new int[numberOfResults];
+
+                //adds the IDs to the array
+                resultSet = null;
+                resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE ((sender = '"
+                                                        + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
+                                                        + username2 + "' AND receiver = '" + username1
+                                                        + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
+
+                resultSet.next();
+                for (int i = 0; i < numberOfResults; i++){
+                    messageIDs[i] = resultSet.getInt(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
+    }
+
+    public static int[] searchInGroup (String username, int groupID, String pattern){
+        //declares an array for the messages found in the group chat
+        int[] messageIDs = new int[0];
+
+        //declares the number of the results
+        int numberOfResults = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
+                                                        + groupID + " AND members LIKE '%" + username
+                                                        + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
+            resultSet.next();
+
+            //checks if the resultSet is empty
+            if (resultSet.getInt(1) != 0){
+                //declares the array
+                messageIDs = new int[numberOfResults];
+
+                //adds the IDs to the array
+                resultSet = null;
+                resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
+                                                            + groupID + " AND members LIKE '%" + username
+                                                            + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
+
+                resultSet.next();
+                for (int i = 0; i < numberOfResults; i++){
+                    messageIDs[i] = resultSet.getInt(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
+    }
+
+    public static int[] searchAllMessages (String username, String pattern){ //FIXME AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        //declares an array for the messages found in the group chat
+        int[] messageIDs = new int[0];
+
+        //declares the number of the results
+        int numberOfResults = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("").executeQuery();
+            resultSet.next();
+
+            //checks if the resultSet is empty
+            if (resultSet.getInt(1) != 0){
+                //declares the array
+                messageIDs = new int[numberOfResults];
+
+                //adds the IDs to the array
+                resultSet = null;
+                resultSet = connection.prepareStatement("").executeQuery();
+
+                resultSet.next();
+                for (int i = 0; i < numberOfResults; i++){
+                    messageIDs[i] = resultSet.getInt(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
+    }
+
+    public static String[] searchForUsers (String pattern){
+        //declares an array for users found
+        String[] users = new String[0];
+
+        //declares the number of the results
+        int numberOfResults = 0;
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT COUNT(username) FROM users WHERE username LIKE '%"
+                                                        + pattern + "%' OR name LIKE '%" + pattern + "%';").executeQuery();
+            resultSet.next();
+
+            //checks if the resultSet is empty
+            if (resultSet.getInt(1) != 0){
+                //declares the array
+                users = new String[numberOfResults];
+
+                //adds the IDs to the array
+                resultSet = null;
+                resultSet = connection.prepareStatement("SELECT username FROM users WHERE username LIKE '%"
+                                                            + pattern + "%' OR name LIKE '%"
+                                                            + pattern + "%';").executeQuery();
+
+                resultSet.next();
+                for (int i = 0; i < numberOfResults; i++){
+                    users[i] = resultSet.getString(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return users;
+    }
 }
