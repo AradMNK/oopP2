@@ -188,18 +188,18 @@ public class Loader {
 
     public static String[] getUserDetails (String username){
         //declares a string array to store the details
-        String[] details = new String[5];
+        String[] details = new String[6];
 
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT name, bio, subtitle, date, type FROM users WHERE username = '"
+            resultSet = connection.prepareStatement("SELECT name, bio, subtitle, date, pfp, type FROM users WHERE username = '"
                                                         + username + "';").executeQuery();
 
             //checks if the resultSet is empty
             if (resultSet.next()){
                 resultSet.next();
-                for (int i = 0; i < 5; i++){
+                for (int i = 0; i < 6; i++){
                     details[i] = resultSet.getString(i+1);
                 }
             }
@@ -1172,7 +1172,7 @@ public class Loader {
 
                     //saves the comments
                     resultSet = null;
-                    resultSet = connection.prepareStatement("SELECT COUNT(commentID) FROM comments WHERE postID = "
+                    resultSet = connection.prepareStatement("SELECT commentID FROM comments WHERE postID = "
                                                                 + postID + ";").executeQuery();
                     resultSet.next();
                     for (int i = 0; i < commentCount; i++){
@@ -1188,14 +1188,67 @@ public class Loader {
     }
 
     public static String getGroupJoiner(int groupID) {
-        return "";
+        //declares the group joiner
+        String joiner = "";
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT joinID FROM groups WHERE groupID = "
+                                                        + groupID + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                joiner = resultSet.getString(1);
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return joiner;
     }
 
     public static String getGroupOwner(int groupID) {
-        return "";
+        //declares the group owner
+        String owner = "";
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT admin FROM groups WHERE groupID = "
+                                                        + groupID + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                owner = resultSet.getString(1);
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return owner;
     }
 
     public static int[] getGroupMessageIDsOfGroup(int groupID, int howMany) {
-        return new int[howMany];
+        //declares an array for the messages
+        int[] messageIDs = new int[howMany];
+
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet = null;
+        try {
+            resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
+                                                        + groupID + " ORDER BY messageID DESC LIMIT "
+                                                        + howMany + ";").executeQuery();
+
+            //checks if the resultSet is empty
+            if (resultSet.next()){
+                resultSet.next();
+                for (int i = howMany - 1; i >= 0; i--){
+                    messageIDs[i] = resultSet.getInt(1);
+                    resultSet.next();
+                }
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return messageIDs;
     }
 }
