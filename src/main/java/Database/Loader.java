@@ -838,7 +838,7 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM groups WHERE members LIKE '"
                                                         + username + ",%' OR '%," + username + "' OR '%,"
-                                                        + username + ",%'" + " OR '" + username + "';").executeQuery();
+                                                        + username + ",%' OR '" + username + "';").executeQuery();
 
             //checks if the resultSet is empty
             if (resultSet.next()){
@@ -852,7 +852,7 @@ public class Loader {
                     //gets the groupIDs
                     resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM groups WHERE members LIKE '"
                                                                 + username + ",%' OR '%," + username + "' OR '%,"
-                                                                + username + ",%'" + "OR '" + username + "';").executeQuery();
+                                                                + username + ",%' OR '" + username + "';").executeQuery();
                     resultSet.next();
                     for (int i = 0; i < groupCount; i++) {
                         groups[i] = resultSet.getInt(1);
@@ -965,7 +965,7 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
                                                         + groupID + " AND (members LIKE '" + username + ",%' OR '%,"
-                                                        + username + "' OR '%," + username + ",%'" + "OR '" + username
+                                                        + username + "' OR '%," + username + ",%' OR '" + username
                                                         + "') AND message LIKE '%" + pattern + "'%;").executeQuery();
             //checks if the resultSet is empty
             if (resultSet.next()) {
@@ -980,7 +980,7 @@ public class Loader {
                     resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
                                                                 + groupID + " AND (members LIKE '" + username
                                                                 + ",%' OR '%," + username + "' OR '%," + username + ",%'"
-                                                                + "OR '" + username + "') AND message LIKE '%" + pattern
+                                                                + " OR '" + username + "') AND message LIKE '%" + pattern
                                                                 + "'%;").executeQuery();
 
                     resultSet.next();
@@ -1050,7 +1050,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM groups "
                                                         + "INNER JOIN groupmessages ON groups.groupID = groupmessages.groupID "
                                                         + "WHERE (groups.members LIKE '" + username + ",%' OR '%,"
-                                                        + username + "' OR '%," + username + ",%'" + "OR '" + username
+                                                        + username + "' OR '%," + username + ",%' OR '" + username
                                                         + "') AND groupmessage.message LIKE '%" + pattern
                                                         + "%';").executeQuery();
 
