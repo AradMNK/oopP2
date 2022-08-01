@@ -118,7 +118,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfLikes = Integer.parseInt(resultSet.getString(1));
             }
         }
@@ -143,7 +142,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of likes
-                resultSet.next();
                 numberOfLikes = resultSet.getInt(1);
 
                 if (numberOfLikes != 0) {
@@ -198,7 +196,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = 0; i < 6; i++){
                     details[i] = resultSet.getString(i+1);
                 }
@@ -305,7 +302,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 message = resultSet.getString(1);
                 return message;
             }
@@ -362,7 +358,7 @@ public class Loader {
                                                         + "' AND followed = '" + followed + "';").executeQuery();
 
             //checks if the resultSet is empty
-            resultSet.next();
+
             if (resultSet.next()){
                 return true;
             }
@@ -385,7 +381,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 viewCount = resultSet.getInt(1);
             }
         }
@@ -407,7 +402,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 likeCount = resultSet.getInt(1);
             }
         }
@@ -425,7 +419,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 return resultSet.getString(1);
             }
         }
@@ -477,7 +470,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 postPoster = resultSet.getString(1);
             }
         }
@@ -498,7 +490,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 while (resultSet.next()){
                     likedAds.add(resultSet.getInt(1));
                     resultSet.next();
@@ -522,7 +513,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 groupID = resultSet.getInt(1);
             }
         }
@@ -584,7 +574,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of likes
-                resultSet.next();
                 numberOfUsers = resultSet.getInt(1);
 
                 if (numberOfUsers != 0) {
@@ -623,7 +612,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of likes
-                resultSet.next();
                 numberOfGroups = resultSet.getInt(1);
 
                 if (numberOfGroups != 0) {
@@ -658,7 +646,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 count = resultSet.getInt(1);
             }
         }
@@ -679,7 +666,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 count = resultSet.getInt(1);
             }
         }
@@ -704,7 +690,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of blocked users
-                resultSet.next();
                 blockedCount = resultSet.getInt(1);
 
                 if (blockedCount != 0) {
@@ -743,7 +728,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of followers
-                resultSet.next();
                 followerCount = resultSet.getInt(1);
 
                 if (followerCount != 0) {
@@ -782,7 +766,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of followings
-                resultSet.next();
                 followingCount = resultSet.getInt(1);
 
                 if(followingCount != 0) {
@@ -821,7 +804,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of posts
-                resultSet.next();
                 postCount = resultSet.getInt(1);
 
                 if (postCount != 0) {
@@ -861,7 +843,6 @@ public class Loader {
             //checks if the resultSet is empty
             if (resultSet.next()){
                 //gets the number of groups
-                resultSet.next();
                 groupCount = resultSet.getInt(1);
 
                 if (groupCount != 0) {
@@ -897,7 +878,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = 0; i < 4; i++){
                     details[i] = resultSet.getString(i+1);
                 }
@@ -920,7 +900,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = 0; i < 4; i++){
                     details[i] = resultSet.getString(i+1);
                 }
@@ -948,7 +927,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfResults = resultSet.getInt(1);
 
                 //checks if the resultSet is empty
@@ -991,7 +969,6 @@ public class Loader {
                                                         + "') AND message LIKE '%" + pattern + "'%;").executeQuery();
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfResults = resultSet.getInt(1);
 
                 //checks if the resultSet is empty
@@ -1035,7 +1012,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfResults = resultSet.getInt(1);
 
                 //checks if the resultSet is empty
@@ -1080,7 +1056,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfResults = resultSet.getInt(1);
 
                 //checks if the resultSet is empty
@@ -1122,7 +1097,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()) {
-                resultSet.next();
                 numberOfResults = resultSet.getInt(1);
 
                 //checks if the resultSet is empty
@@ -1163,7 +1137,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 commentCount = resultSet.getInt(1);
 
                 if (commentCount != 0) {
@@ -1197,7 +1170,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 joiner = resultSet.getString(1);
             }
         }
@@ -1217,7 +1189,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 owner = resultSet.getString(1);
             }
         }
@@ -1239,7 +1210,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = howMany - 1; i >= 0; i--){
                     messageIDs[i] = resultSet.getInt(1);
                     resultSet.next();
@@ -1266,7 +1236,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = howMany - 1; i >= 0; i--){
                     messageIDs[i] = resultSet.getInt(1);
                     resultSet.next();
@@ -1291,7 +1260,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = 0; i < 5; i++){
                     details[i] = resultSet.getString(i+1);
                 }
@@ -1315,7 +1283,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 for (int i = 0; i < 5; i++){
                     details[i] = resultSet.getString(i+1);
                 }
@@ -1341,7 +1308,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 postCount = resultSet.getInt(1);
 
                 if (postCount != 0) {
@@ -1379,7 +1345,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 likeCount = resultSet.getInt(1);
 
                 if (likeCount != 0) {
@@ -1417,7 +1382,6 @@ public class Loader {
 
             //checks if the resultSet is empty
             if (resultSet.next()){
-                resultSet.next();
                 commentCount = resultSet.getInt(1);
 
                 if (commentCount != 0) {
