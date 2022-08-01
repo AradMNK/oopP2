@@ -936,10 +936,10 @@ public class Loader {
         int[] messageIDs = new int[0];
 
         //declares the number of the results
-        int numberOfResults = 0;
+        int numberOfResults;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM directmessages WHERE ((sender = '"
                                                         + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
@@ -957,7 +957,6 @@ public class Loader {
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = null;
                     resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE ((sender = '"
                             + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
                             + username2 + "' AND receiver = '" + username1
@@ -981,10 +980,10 @@ public class Loader {
         int[] messageIDs = new int[0];
 
         //declares the number of the results
-        int numberOfResults = 0;
+        int numberOfResults;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
                                                         + groupID + " AND members LIKE '%" + username
@@ -1000,7 +999,6 @@ public class Loader {
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = null;
                     resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
                             + groupID + " AND members LIKE '%" + username
                             + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
@@ -1023,12 +1021,12 @@ public class Loader {
         int[] messageIDs = new int[0];
 
         //declares the number of the results
-        int numberOfResults = 0;
+        int numberOfResults;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM direcrmessages WHERE (sender ='"
+            resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM directmessages WHERE (sender ='"
                                                         + username + "' OR receiver = '" + username
                                                         + "') AND message LIKE '%" + pattern + "%';").executeQuery();
 
@@ -1043,8 +1041,7 @@ public class Loader {
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = null;
-                    resultSet = connection.prepareStatement("SELECT messageID FROM direcrmessages WHERE (sender ='"
+                    resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE (sender ='"
                                                                 + username + "' OR receiver = '" + username
                                                                 + "') AND message LIKE '%" + pattern + "%';").executeQuery();
 
@@ -1066,10 +1063,10 @@ public class Loader {
         int[] messageIDs = new int[0];
 
         //declares the number of the results
-        int numberOfResults = 0;
+        int numberOfResults;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM groups "
                                                         + "INNER JOIN groupmessages ON groups.groupID = groupmessages.groupID "
@@ -1087,7 +1084,6 @@ public class Loader {
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = null;
                     resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM groups INNER JOIN "
                                                                 + "groupmessages ON groups.groupID = groupmessages.groupID "
                                                                 + "WHERE groupmessage.message LIKE '%" + pattern
@@ -1111,10 +1107,10 @@ public class Loader {
         String[] users = new String[0];
 
         //declares the number of the results
-        int numberOfResults = 0;
+        int numberOfResults;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(username) FROM users WHERE username LIKE '%"
                                                         + pattern + "%' OR name LIKE '%" + pattern + "%';").executeQuery();
@@ -1130,7 +1126,6 @@ public class Loader {
                     users = new String[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = null;
                     resultSet = connection.prepareStatement("SELECT username FROM users WHERE username LIKE '%"
                                                                 + pattern + "%' OR name LIKE '%"
                                                                 + pattern + "%';").executeQuery();
@@ -1153,10 +1148,10 @@ public class Loader {
         int[] comments = new int[0];
 
         //declares the number of the comments
-        int commentCount = 0;
+        int commentCount;
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(commentID) FROM comments WHERE postID = "
                                                         + postID + ";").executeQuery();
@@ -1171,7 +1166,6 @@ public class Loader {
                     comments = new int[commentCount];
 
                     //saves the comments
-                    resultSet = null;
                     resultSet = connection.prepareStatement("SELECT commentID FROM comments WHERE postID = "
                                                                 + postID + ";").executeQuery();
                     resultSet.next();
@@ -1191,7 +1185,7 @@ public class Loader {
         //declares the group joiner
         String joiner = "";
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT joinID FROM groups WHERE groupID = "
                                                         + groupID + ";").executeQuery();
@@ -1211,7 +1205,7 @@ public class Loader {
         //declares the group owner
         String owner = "";
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT admin FROM groups WHERE groupID = "
                                                         + groupID + ";").executeQuery();
@@ -1232,7 +1226,7 @@ public class Loader {
         int[] messageIDs = new int[howMany];
 
         Connection connection = Connector.connector.connect();
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
                                                         + groupID + " ORDER BY messageID DESC LIMIT "
@@ -1250,5 +1244,29 @@ public class Loader {
         catch (SQLException e) {e.printStackTrace();}
         finally {Connector.connector.disconnect();}
         return messageIDs;
+    }
+
+    public static int[] getMessageIDsOfUsers(String username, String username1, int howMany) {
+        return new int[1];
+    }
+
+    public static String[] getGroupMessageDetails(int groupMessageID) {
+        return new String[1];
+    }
+
+    public static String[] getMessageDetails(int messageID) {
+        return new String[2];
+    }
+
+    public static int[] getPostFeed(String username) {
+        return new int[1];
+    }
+
+    public static int[] getLikeFeed(String username) {
+        return new int[1];
+    }
+
+    public static int[] getCommentFeed(String username) {
+        return new int[1];
     }
 }

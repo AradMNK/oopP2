@@ -13,9 +13,8 @@ public class UserRecommender {
 
         for (String followerUsername: Loginner.loginnedUser.getFollowings()){
             User user = UserBuilder.getUserFromDatabaseWithFollowings(followerUsername);
-            for (String followerUsername2 : user.getFollowings()){
+            for (String followerUsername2 : user.getFollowings())
                 followerOfFollowers.add(UserBuilder.getUserFromDatabaseWithFollowings(followerUsername2));
-            }
         }
 
         followerOfFollowers.removeIf(user -> Loginner.loginnedUser.getFollowings().contains(user.getUsername()));

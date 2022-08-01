@@ -1,18 +1,17 @@
 package Builder;
 
-import Objects.GroupMessage;
+import Objects.Message;
 import Objects.SaveHandle;
 
 import java.time.LocalDateTime;
 
-public class GroupMessageBuilder {
+public class MessageBuilder {
+    public static Message getMessageFromDatabase(int messageID) {
+        Message message = new Message();
 
-    public static GroupMessage getGroupMessageFromDatabase(int groupMessageID) {
-        GroupMessage message = new GroupMessage();
+        String[] details = Database.Loader.getMessageDetails(messageID);
 
-        String[] details = Database.Loader.getGroupMessageDetails(groupMessageID);
-
-        message.setID(new SaveHandle(groupMessageID));
+        message.setID(new SaveHandle(messageID));
         int i = 0;
         message.setUsername(details[i++]);
         message.setUserName(details[i++]);

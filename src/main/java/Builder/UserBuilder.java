@@ -1,6 +1,7 @@
 package Builder;
 
 import Objects.BusinessUser;
+import Objects.Handle;
 import Objects.User;
 import Objects.UserType;
 
@@ -15,7 +16,7 @@ public class UserBuilder {
 
     public static User getUserFromDatabaseFull(String username){
         User user = getUserFromDatabaseWithPosts(username);
-        user.setFeed(FeedBuilder.getFeedFromDatabase(username));
+        user.setFeed(FeedBuilder.getFeedFromDatabase(user));
         user.setFollowers(Arrays.stream(Database.Loader.getBlocklist(username)).collect(Collectors.toSet()));
         user.setFollowers(Arrays.stream(Database.Loader.getFollowers(username)).collect(Collectors.toSet()));
         user.setFollowings(Arrays.stream(Database.Loader.getFollowings(username)).collect(Collectors.toSet()));
@@ -26,14 +27,16 @@ public class UserBuilder {
     public static User getUserFromDatabaseDetailsOnly(String username){
         String[] details = Database.Loader.getUserDetails(username);
         User user;
-        if (details[4].equals(UserType.BUSINESS.toString())) user = new BusinessUser();
+        if (details[details.length - 1].equals(UserType.BUSINESS.toString())) user = new BusinessUser();
         else user = new User();
+
         user.setUsername(username);
         int i = 0;
         user.setName(details[i++]);
         user.setBio(details[i++]);
         user.setSubtitle(details[i++]);
-        user.setDateJoined(LocalDate.parse(details[i]));
+        user.setDateJoined(LocalDate.parse(details[i++]));
+        user.setPfp(new Handle(details[i]));
         return user;
     }
 

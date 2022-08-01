@@ -2,12 +2,7 @@ package TextController;
 
 import Login.LoginState;
 import Login.Loginner;
-import Objects.Comment;
-import Objects.Post;
-import Objects.User;
-import Objects.UserType;
-
-import java.util.Map;
+import Objects.*;
 
 public class FeedController {
     private static final int overlineCount = 15, ellipsisCount = 20;
@@ -51,10 +46,11 @@ public class FeedController {
     }
 
     private static void showLikes(User user) {
-        for (Map.Entry<Post, Integer> entry : user.getFeed().getLikers().entrySet()){
-            TextController.println("[" + entry.getKey().getPostID() + "] (" + ellipsis(entry.getKey().getDescription())
-                    + "): " + entry.getValue() + " likes");
-            Database.Changer.removeLikeFromFeed(user.getUsername(), entry.getKey().getPostID().getHandle());
+        for (Like like: user.getFeed().getLikes()){
+            TextController.println("[" + like.getPost().getPostID().getHandle()
+                    + "] (" + ellipsis(like.getPost().getDescription())
+                    + ") was liked by: @[" + like.getLikerUsername() + "]");
+            Database.Changer.removeLikeFromFeed(user.getUsername(), like.getPost().getPostID().getHandle());
         }
     }
 

@@ -9,13 +9,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class GroupController {
-    final static int replyShowNum = 10, notReplyID = 0, showMessagesIncrement = 10;
-    static int showMessages = 10;
+    final static int replyShowNum = 10, notReplyID = 0, showMessagesIncrement = 10, showMessagesInit = 10;
+    static int showMessages = showMessagesInit;
     final static String inReplyTo = "In reply to: ", ellipsis = "...";
     public static Group group;
 
     public static void attemptEntrance(Group g) {
         group = g;
+        showMessages = showMessagesInit;
 
         showPreviousChats();
 
@@ -74,6 +75,7 @@ public class GroupController {
                 case JOINER -> showJoiner();
 
                 case REFRESH -> refresh();
+                case MORE -> more();
                 case LEAVE -> {leave(); return true;}
 
                 case EXIT -> {return true;}
@@ -253,6 +255,10 @@ public class GroupController {
         group = GroupBuilder.getGroupFromDatabaseFull(group.getGroupID().getHandle(), showMessages);
         showPreviousChats();
     }
+    private static void more() {
+        showMessages += showMessagesIncrement;
+        refresh();
+    }
 
     private static String getInReplyTo(int num){
         Message message = group.getShownMessages().get(num);
@@ -297,6 +303,7 @@ enum GroupCommand{
     REPLY("\\reply"),
     EDIT("\\edit"),
     REFRESH("\\ref"),
+    MORE("\\more"),
     FORWARD("\\forward"),
     DELETE("\\del"),
 

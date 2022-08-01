@@ -11,7 +11,8 @@ import Objects.DirectMessenger;
 import java.time.LocalDateTime;
 
 public class DmController {
-    final static int replyShowNum = 10, notReplyID = 0;
+    final static int replyShowNum = 10, notReplyID = 0, showMessagesIncrement = 10, showMessagesInit = 10;
+    static int showMessages = showMessagesInit;
     final static String inReplyTo = "In reply to: ", ellipsis = "...";
     public static DirectMessenger dm;
     public static boolean uBlocked, uBlocker;
@@ -26,9 +27,11 @@ public class DmController {
            return;
         }
 
-        dm = DirectMessengerBuilder.getDirectMessengerFromDatabase(Loginner.loginnedUser, username);
+
+        dm = DirectMessengerBuilder.getDirectMessengerFromDatabase(Loginner.loginnedUser, username, showMessages);
         //if users have dm load else create
 
+        showMessages = showMessagesInit;
         showPreviousChats();
 
         uBlocked = Database.Loader.isUserBlocked(dm.getUser().getUsername(), dm.getRecipient().getUsername());
@@ -88,6 +91,7 @@ public class DmController {
                 case UNBLOCK -> unblock();
 
                 case REFRESH -> refresh();
+                case MORE -> more();
 
                 case LEAVE -> {return true;}
                 default -> {}
@@ -96,6 +100,11 @@ public class DmController {
         catch (ArrayIndexOutOfBoundsException e){
             if (line.startsWith("\\")) TextController.println("You need to provide an argument for " + line);}
         return false;
+    }
+
+    private static void more() {
+        showMessages += showMessagesIncrement;
+        refresh();
     }
 
     private static void unblock() {
@@ -205,7 +214,7 @@ public class DmController {
         refresh();
     }
     private static void refresh() {
-        dm = DirectMessengerBuilder.getDirectMessengerFromDatabase(dm.getUser(), dm.getRecipient());
+        dm = DirectMessengerBuilder.getDirectMessengerFromDatabase(dm.getUser(), dm.getRecipient(),  showMessages);
         showPreviousChats();
 
         uBlocked = Database.Loader.isUserBlocked(dm.getUser().getUsername(), dm.getRecipient().getUsername());
@@ -241,6 +250,7 @@ enum DmCommand{
     REFRESH("\\ref"),
     FORWARD("\\forward"),
     DELETE("\\del"),
+    MORE("\\more"),
     LEAVE("/leave"),
 
     BLOCK("\\block"),
