@@ -986,8 +986,9 @@ public class Loader {
         ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
-                                                        + groupID + " AND members LIKE '%" + username
-                                                        + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
+                                                        + groupID + " AND (members LIKE '" + username + ",%' OR '%,"
+                                                        + username + "' OR '%," + username + ",%'" + "OR '" + username
+                                                        + "') AND message LIKE '%" + pattern + "'%;").executeQuery();
             //checks if the resultSet is empty
             if (resultSet.next()) {
                 resultSet.next();
@@ -1000,8 +1001,10 @@ public class Loader {
 
                     //adds the IDs to the array
                     resultSet = connection.prepareStatement("SELECT messageID FROM groupmessages WHERE groupID = "
-                            + groupID + " AND members LIKE '%" + username
-                            + "%' AND message LIKE '%" + pattern + "'%;").executeQuery();
+                                                                + groupID + " AND (members LIKE '" + username
+                                                                + ",%' OR '%," + username + "' OR '%," + username + ",%'"
+                                                                + "OR '" + username + "') AND message LIKE '%" + pattern
+                                                                + "'%;").executeQuery();
 
                     resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
