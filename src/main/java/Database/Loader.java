@@ -838,7 +838,7 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM groups WHERE members LIKE '"
                                                         + username + ",%' OR '%," + username + "' OR '%,"
-                                                        + username + ",%'" + "OR '" + username + "';").executeQuery();
+                                                        + username + ",%'" + " OR '" + username + "';").executeQuery();
 
             //checks if the resultSet is empty
             if (resultSet.next()){
