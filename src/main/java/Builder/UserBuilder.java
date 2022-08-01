@@ -33,10 +33,17 @@ public class UserBuilder {
         user.setUsername(username);
         int i = 0;
         user.setName(details[i++]);
-        user.setBio(details[i++]);
-        user.setSubtitle(details[i++]);
+
+        String nullable = details[i++];
+        if (nullable == null) nullable = "";
+        user.setBio(nullable);
+        nullable = details[i++];
+        if (nullable == null) nullable = "";
+        user.setSubtitle(nullable);
         user.setDateJoined(LocalDate.parse(details[i++]));
-        user.setPfp(new Handle(details[i]));
+        nullable = details[i];
+        if (nullable == null) nullable = "";
+        user.setPfp(new Handle(nullable));
         return user;
     }
 

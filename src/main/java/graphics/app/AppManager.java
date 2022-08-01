@@ -69,7 +69,7 @@ public class AppManager {
         mainStage.setMaximized(true);
 
         mainStage.show();
-        ((MainFXML)fxmlLoader.getController()).initialize(scene.getRoot());
+        ((MainFXML)fxmlLoader.getController()).initialize();
         mainStage.requestFocus();
         mainStage.show();
     }

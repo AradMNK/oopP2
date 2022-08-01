@@ -5,12 +5,18 @@ import javafx.concurrent.Task;
 public class Utility {
     public static final String
     APP_TITLE = "Instakilogram",
+
     LOGIN_FXML_PATH = "Login.fxml",
     FORGOT_FXML_PATH = "Forgot Password.fxml",
     CREATE_FXML_PATH = "Create Account.fxml",
+
     MAIN_FXML_PATH = "Main.fxml",
+    MY_ACCOUNT_FXML_PATH = "My Account.fxml",
+
     LIGHT_MODE_CSS_PATH = "Light.css",
     DARK_MODE_CSS_PATH = "Dark.css",
+
+    UNKNOWN_USER_PICTURE = "unknown user.jpg",
     ICON_PATH = "instakilogram.png";
 
     public static final int PREF_WIDTH = 900, PREF_HEIGHT = 600;

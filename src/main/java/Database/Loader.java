@@ -431,7 +431,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT * FROM groups WHERE groupIS = " + groupID + ";").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM group_chats WHERE groupIS = " + groupID + ";").executeQuery();
 
             //checks if the resultSet is empty
             if (resultSet.next()){
@@ -447,7 +447,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT * FROM groups WHERE joinID = '" + groupJoiner + "';").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM group_chats WHERE joinID = '" + groupJoiner + "';").executeQuery();
 
             //checks if the resultSet is empty
             if (resultSet.next()){
@@ -508,7 +508,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT groupID FROM groups WHERE joinID = '"
+            resultSet = connection.prepareStatement("SELECT groupID FROM group_chats WHERE joinID = '"
                                                         + joiner + "';").executeQuery();
 
             //checks if the resultSet is empty
@@ -836,7 +836,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM groups WHERE members LIKE '"
+            resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM group_chats WHERE members LIKE '"
                                                         + username + ",%' OR '%," + username + "' OR '%,"
                                                         + username + ",%'" + " OR '" + username + "';").executeQuery();
 
@@ -850,7 +850,7 @@ public class Loader {
                     groups = new int[groupCount];
 
                     //gets the groupIDs
-                    resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM groups WHERE members LIKE '"
+                    resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM group_chats WHERE members LIKE '"
                                                                 + username + ",%' OR '%," + username + "' OR '%,"
                                                                 + username + ",%'" + "OR '" + username + "';").executeQuery();
                     resultSet.next();
@@ -1047,9 +1047,9 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM groups "
-                                                        + "INNER JOIN groupmessages ON groups.groupID = groupmessages.groupID "
-                                                        + "WHERE (groups.members LIKE '" + username + ",%' OR '%,"
+            resultSet = connection.prepareStatement("SELECT COUNT(groupmessages.messageID) FROM group_chats "
+                                                        + "INNER JOIN groupmessages ON group_chats.groupID = groupmessages.groupID "
+                                                        + "WHERE (group_chats.members LIKE '" + username + ",%' OR '%,"
                                                         + username + "' OR '%," + username + ",%'" + "OR '" + username
                                                         + "') AND groupmessage.message LIKE '%" + pattern
                                                         + "%';").executeQuery();
@@ -1064,8 +1064,8 @@ public class Loader {
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM groups INNER JOIN "
-                                                                + "groupmessages ON groups.groupID = groupmessages.groupID "
+                    resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM group_chats INNER JOIN "
+                                                                + "groupmessages ON group_chats.groupID = groupmessages.groupID "
                                                                 + "WHERE groupmessage.message LIKE '%" + pattern
                                                                 + "%';").executeQuery();
 
@@ -1165,7 +1165,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT joinID FROM groups WHERE groupID = "
+            resultSet = connection.prepareStatement("SELECT joinID FROM group_chats WHERE groupID = "
                                                         + groupID + ";").executeQuery();
 
             //checks if the resultSet is empty
@@ -1184,7 +1184,7 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT admin FROM groups WHERE groupID = "
+            resultSet = connection.prepareStatement("SELECT admin FROM group_chats WHERE groupID = "
                                                         + groupID + ";").executeQuery();
 
             //checks if the resultSet is empty

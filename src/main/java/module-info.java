@@ -9,4 +9,5 @@ module graphics {
 
     opens graphics.app to javafx.fxml;
     exports graphics.app;
+    exports Objects;
 }
