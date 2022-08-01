@@ -23,7 +23,11 @@ public class TextController {
         if (line.equals("")) return getLine();
         return line;
     }
-    public static String getNext(){return scanner.next();}
+    public static String getNext(){
+        String next = scanner.next();
+        if (next.equals("")) return getNext();
+        return next;
+    }
 
     private static void actOnCommand(Command command){
         switch (command.getCommandType()){
