@@ -57,7 +57,7 @@ public class PostBuilder {
         post.setPostID(new SaveHandle(postID));
         post.setPoster(poster);
         post.setDescription(details[1]);
-        post.setDatePosted(LocalDateTime.parse(details[2]));
+        post.setDatePosted(LocalDateTime.parse(details[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
         return post;
     }

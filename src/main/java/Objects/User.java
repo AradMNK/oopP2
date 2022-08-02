@@ -54,6 +54,13 @@ public class User {
         for (String usernames: followers)
             Database.Saver.updateFeedsFromPost(usernames, handle);
     }
+    public void post(String description, String picturePath) {
+        LocalDateTime dateTime = LocalDateTime.now();
+        int handle = Database.Saver.addToPosts(username, dateTime, description, getUserType().toString(), picturePath);
+        posts.add(new Post(handle, description, dateTime, this, picturePath));
+        for (String usernames: followers)
+            Database.Saver.updateFeedsFromPost(usernames, handle);
+    }
 
     public void comment(int postID, String msg){
         int handle = Database.Saver.addToComments(username, LocalDateTime.now(), postID, msg);
@@ -108,8 +115,4 @@ public class User {
 
     @Override
     public String toString(){return username;}
-
-    public void post(String text, String picturePath) {
-
-    }
 }

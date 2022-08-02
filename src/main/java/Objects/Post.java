@@ -17,6 +17,13 @@ public class Post {
         this.datePosted = datePosted;
         this.poster = poster;
     }
+    public Post(int postID, String description, LocalDateTime datePosted, User poster, String picturePath) {
+        this.postID = new SaveHandle(postID);
+        this.description = description;
+        this.datePosted = datePosted;
+        this.poster = poster;
+        this.picture = new Handle(picturePath);
+    }
 
     private final HashSet<Comment> comments = new HashSet<>();
 
