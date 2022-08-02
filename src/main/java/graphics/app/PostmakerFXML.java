@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 
 public class PostmakerFXML {
     MainFXML root;
-    static String picturePath = "";
+    String picturePath = "";
 
     @FXML TextArea inputMessage;
     @FXML Button attachButton, cancelButton, postButton;
