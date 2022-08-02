@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainFXML {
     @FXML Pane rootDisplay;
@@ -48,14 +49,17 @@ public class MainFXML {
 
     }
     @FXML void theme(){
-        System.out.println(AppManager.mainStage.getScene().getStylesheets().toString());
         if (Theme.currentTheme == Theme.LIGHT){
             Theme.currentTheme = Theme.DARK;
-            AppManager.launchMain(Utility.DARK_MODE_CSS_PATH);
+            AppManager.mainStage.getScene().getStylesheets().clear();
+            AppManager.mainStage.getScene().getStylesheets().add(Objects.requireNonNull
+                    (Launcher.class.getResource(Utility.DARK_MODE_CSS_PATH)).toString());
             return;
         }
         Theme.currentTheme = Theme.LIGHT;
-        AppManager.launchMain(Utility.LIGHT_MODE_CSS_PATH);
+        AppManager.mainStage.getScene().getStylesheets().clear();
+        AppManager.mainStage.getScene().getStylesheets().add(Objects.requireNonNull
+                (Launcher.class.getResource(Utility.LIGHT_MODE_CSS_PATH)).toString());
     }
 
     @FXML void hoverSearchButton(){new Pulse(searchButton).play();}

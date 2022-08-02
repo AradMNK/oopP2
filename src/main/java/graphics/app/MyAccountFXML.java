@@ -47,7 +47,7 @@ public class MyAccountFXML {
     }
 
     @FXML void hoverNameLabel(){new Pulse(nameLabel).play();}
-    @FXML void hoverBioLabel(){new Pulse(bioField).play();}
+    @FXML void hoverBioLabel(){new Pulse(bioLabel).play();}
     @FXML void hoverSubtitleLabel(){new Pulse(subtitleLabel).play();}
     @FXML void hoverNameField(){new Pulse(nameField).play();}
     @FXML void hoverBioField(){new Pulse(bioField).play();}

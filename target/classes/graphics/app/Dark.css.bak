@@ -11,7 +11,7 @@
     src: url('Fonts/AgeoPersonalUse.otf') format('opentype');
 }
 .root {       
-    -fx-text-background-color: #1B2430;
+    -fx-text-background-color: black;
     -fx-text-fill: #1B2430;
     -fx-text-base-color: #1B2430;
     -fx-text-inner-color: #1B2430;

@@ -3,6 +3,7 @@ package graphics.app;
 import Login.Loginner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class PostFXML {
+    @FXML Button likeButton, commentButton;
     @FXML Circle picture;
     @FXML Text name, username, bio, postContent, subtitle, date;
     @FXML ScrollPane postPane, bioPane;
@@ -33,6 +35,9 @@ public class PostFXML {
         postContent.wrappingWidthProperty().bind(postPane.widthProperty().subtract(Utility.POST_TEXT_MARGIN_FROM_RIGHT));
         this.bio.wrappingWidthProperty().bind(bioPane.widthProperty().subtract(Utility.POST_TEXT_MARGIN_FROM_RIGHT));
         picture.radiusProperty().bind(picturePane.heightProperty().divide(2));
+
+        commentButton.setDisable(true);
+        likeButton.setDisable(true);
     }
 
     public void initialize(Post post){

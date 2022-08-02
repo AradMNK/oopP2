@@ -174,7 +174,7 @@
             <Insets />
          </GridPane.margin>
          <padding>
-            <Insets left="20.0" />
+            <Insets left="20.0" right="15.0" />
          </padding>
       </ToolBar>
       <Pane fx:id="rootDisplay" prefHeight="600.0" prefWidth="656.0" GridPane.columnIndex="1" />
