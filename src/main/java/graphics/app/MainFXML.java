@@ -46,7 +46,10 @@ public class MainFXML {
 
     }
     @FXML void post(){
-
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.POSTMAKER_FXML_PATH));
+        try {setDisplayTo(fxmlLoader.load());} catch (IOException e) {AppManager.alert(Alert.AlertType.ERROR,
+                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace();}
+        ((PostmakerFXML)fxmlLoader.getController()).root = this;
     }
     @FXML void theme(){
         if (Theme.currentTheme == Theme.LIGHT){
@@ -73,8 +76,11 @@ public class MainFXML {
     @FXML void hoverPost(){new Pulse(postButton).play();}
     @FXML void hoverTheme(){new Pulse(themeButton).play();}
 
-    private void setDisplayTo(Parent root){
+    void setDisplayTo(Parent root){
         rootDisplay.getChildren().clear();
         rootDisplay.getChildren().add(root);
+    }
+    void removeDisplay(){
+        rootDisplay.getChildren().clear();
     }
 }

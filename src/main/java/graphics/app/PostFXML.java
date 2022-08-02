@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -42,6 +43,13 @@ public class PostFXML {
         likeButton.setDisable(true);
     }
 
+    private void initPicture(String handle) {
+        if (handle.equals("")) return;
+
+        ImageView imageView = new ImageView();
+        imageView.setImage(new Image(handle));
+    }
+
     public void initialize(Post post){
         if (post.getPoster().getPfp().getHandle().equals(""))
             picture.setFill(new ImagePattern(new Image
@@ -57,6 +65,7 @@ public class PostFXML {
         User poster = post.getPoster();
         initContents(poster.getName(), poster.getUsername(), poster.getBio(),
                 post.getDescription(), poster.getSubtitle(), post.getDatePosted());
+        initPicture(post.getPicture().getHandle());
     }
 
     public void initializeSample(){
