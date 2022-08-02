@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
@@ -23,6 +24,7 @@ public class PostFXML {
     @FXML Text name, username, bio, postContent, subtitle, date;
     @FXML ScrollPane postPane, bioPane;
     @FXML GridPane picturePane;
+    @FXML ToolBar toolbar;
 
     private void initContents(String name, String username, String bio, String post, String subtitle, LocalDateTime time){
         this.name.setText(name);

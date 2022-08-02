@@ -1187,18 +1187,18 @@
     -fx-background-insets: 0, 1, 2;
 	-fx-font-size: 200%;
     -fx-padding: 3 5 3 5;    
-	-fx-background-radius: 15;
+	-fx-background-radius: 0;
     -fx-prompt-text-fill: #c6bad4;
 }
 .text-field:hover {
     -fx-background-color: transparent,#403f5c,#e0dff2;
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 15;
+    -fx-background-radius: 0;
 }
 .text-field:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2;
     -fx-background-insets: -0.4, 1, 2;
-    -fx-background-radius: 15;    
+    -fx-background-radius: 0;    
 }
 /*******************************************************************************
  *                                                                             *
@@ -1231,12 +1231,12 @@
     -fx-background-radius: 0;    
 }
 .text-area .scroll-pane {
-    -fx-background-color: black;
-	-fx-background-radius: 15; 
+    -fx-background-color: transparent;
+	-fx-background-radius: 0; 
 }
 .text-area .content{
-    -fx-background-color: white, white;
-	-fx-background-radius: 20; 
+    -fx-background-color: rgb(236,238,241);
+	-fx-background-radius: 0; 
 }
 /*******************************************************************************
  *                                                                             *

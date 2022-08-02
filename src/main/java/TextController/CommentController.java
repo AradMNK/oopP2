@@ -41,7 +41,7 @@ public class CommentController {
         while (true){
             stringBuilder.append(line);
             line = TextController.getLine();
-            if (!line.equals("/" + CommandType.COMMENT)) break;
+            if (line.equals("/" + CommandType.COMMENT)) break;
             stringBuilder.append("\n");
         }
 

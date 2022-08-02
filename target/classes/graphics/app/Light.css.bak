@@ -1228,10 +1228,15 @@
 .text-area:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2;
     -fx-background-insets: -0.4, 1, 2;
-    -fx-background-radius: 15;    
+    -fx-background-radius: 0;    
 }
 .text-area .scroll-pane {
     -fx-background-color: transparent;
+	-fx-background-radius: 0; 
+}
+.text-area .content{
+    -fx-background-color: rgb(236,238,241);
+	-fx-background-radius: 0; 
 }
 /*******************************************************************************
  *                                                                             *

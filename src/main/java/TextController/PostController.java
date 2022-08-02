@@ -34,7 +34,7 @@ public class PostController {
         while (true){
             stringBuilder.append(line);
             line = TextController.getLine();
-            if (!line.equals("/" + CommandType.POST)) break;
+            if (line.equals("/" + CommandType.POST)) break;
             stringBuilder.append("\n");
         }
 

@@ -93,7 +93,7 @@
          </font></Text>
       <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="\@username" underline="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <Text fx:id="date" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="date" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+      <ToolBar fx:id="toolbar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <items>
           <Button fx:id="likeButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" style="-fx-font-size: 1em;" styleClass="icon-button" text="Like">
                <graphic>
