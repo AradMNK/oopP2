@@ -889,18 +889,19 @@
 *                                                                              *
 *******************************************************************************/
 .scroll-pane {    
-    -fx-background-color: transparent, #403f5c, #e5e4ee;
+    -fx-background-color: transparent, #403f5c, #5e5985;
     -fx-background-insets: 0,0,1;
-    -fx-padding: 1.0;    
+    -fx-padding: 2;    
 }
 .scroll-pane:focused {
-    -fx-background-color:  #403f5c,  #403f5c, #e5e4ee;    
+    -fx-background-color:  #403f5c,  #403f5c, #5e5985;    
     -fx-background-insets: -1.4, 0, 1;
 }
 .scroll-pane .corner {
     -fx-background-color: #403f5c, #7b728f;
     -fx-background-insets: 0, 1 1 1 1;
 }
+.scroll-pane .viewport {    -fx-background-color: #c1c5d4;}
 /*******************************************************************************
 *                                                                              *
 * ComboBoxBase                                                                 *
@@ -1817,4 +1818,14 @@
 	 -fx-background-radius: 15;
 	 -fx-background-insets: 1, 2;
 	 -fx-background-color: #23212b, #D6EFED;
+ }
+ /*******************************************************************************
+ *                                                                             *
+ * Text                                                                        *
+ *                                                                             *
+ ******************************************************************************/
+ .text{
+	 -fx-fill: #2a2c38;
+	 -fx-padding: 2;
+	 -fx-font-family: 'System';
  }

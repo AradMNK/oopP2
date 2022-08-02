@@ -26,7 +26,7 @@ public class AppManager {
 
         stage.show();
         ((LoginFXML)fxmlLoader.getController()).initialize(scene.getRoot());
-        //stage.requestFocus();
+        stage.requestFocus();
         stage.show();
     }
 

@@ -4,43 +4,46 @@ import Login.Loginner;
 import animatefx.animation.Pulse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.stage.DirectoryChooser;
-
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 public class MyAccountFXML {
-    @FXML Pane preview;
-    @FXML TextField bioField, subtitleField, nameField;
+    @FXML GridPane preview;
+    @FXML TextField nameField;
+    @FXML TextArea bioField, subtitleField;
     @FXML Button pictureButton, updatePreviewButton;
     @FXML Label nameLabel, bioLabel, subtitleLabel;
 
     private void updatePreview(){
+        update();
+        preview.getChildren().clear();
         FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.POST_FXML_PATH));
-        preview.getChildren().removeAll();
         try {preview.getChildren().add(fxmlLoader.load());} catch (IOException e) {AppManager.alert(Alert.AlertType.ERROR,
-                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace();}
+                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace(); return;}
         ((PostFXML)fxmlLoader.getController()).initializeSample();
     }
 
     public void initialize(){
-        updatePreview();
+        nameField.setText(Loginner.loginnedUser.getName());
         bioField.setText(Loginner.loginnedUser.getBio());
         subtitleField.setText(Loginner.loginnedUser.getSubtitle());
+        updatePreview();
     }
 
     @FXML void changePicture(){
         String directory;
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.showDialog(AppManager.mainStage);
-        directory = directoryChooser.getInitialDirectory().getAbsolutePath();
-        Database.Changer.setUserPfp(Loginner.loginnedUser.getUsername(), directory);
-        Loginner.loginnedUser.getPfp().setHandle(directory);
-        updatePreview();
+        FileChooser fileChooser = new FileChooser();
+        try {
+            directory = fileChooser.showOpenDialog(AppManager.mainStage).toURI().toURL().toExternalForm();
+            Database.Changer.setUserPfp(Loginner.loginnedUser.getUsername(), directory);
+            Loginner.loginnedUser.getPfp().setHandle(directory);
+            updatePreview();
+        }
+        catch (MalformedURLException e) {AppManager.alert(Alert.AlertType.ERROR,
+                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace();}
     }
 
     @FXML void hoverNameLabel(){new Pulse(nameLabel).play();}
@@ -57,10 +60,22 @@ public class MyAccountFXML {
                 bio = Loginner.loginnedUser.getBio().equals(bioField.getText()),
                 subtitle = Loginner.loginnedUser.getSubtitle().equals(subtitleField.getText());
 
-        if (name) Database.Changer.setUserName(Loginner.loginnedUser.getUsername(), nameField.getText());
-        if (name) Database.Changer.setUserBio(Loginner.loginnedUser.getUsername(), bioField.getText());
-        if (name) Database.Changer.setUserSubtitle(Loginner.loginnedUser.getUsername(), subtitleField.getText());
+        if (!name) {
+            Database.Changer.setUserName(Loginner.loginnedUser.getUsername(), nameField.getText());
+            Loginner.loginnedUser.setName(nameField.getText());
+        }
+        if (!bio) {
+            Database.Changer.setUserBio(Loginner.loginnedUser.getUsername(), bioField.getText());
+            Loginner.loginnedUser.setBio(bioField.getText());
+        }
+        if (!subtitle) {
+            Database.Changer.setUserSubtitle(Loginner.loginnedUser.getUsername(), subtitleField.getText());
+            Loginner.loginnedUser.setSubtitle(subtitleField.getText());
+        }
 
-        if (!(name && bio && subtitle)) updatePreview();
+
+        if (!(name && bio && subtitle)){
+            updatePreview();
+        }
     }
 }

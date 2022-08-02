@@ -28,8 +28,7 @@ public class MainFXML {
     @FXML void myAccount(){
         FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.MY_ACCOUNT_FXML_PATH));
         try {setDisplayTo(fxmlLoader.load());} catch (IOException e) {AppManager.alert(Alert.AlertType.ERROR,
-                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace(); return;}
-        ((MyAccountFXML)fxmlLoader.getController()).initialize();
+                "Exception occurred.", e.getClass().toString(), "Exception"); e.printStackTrace();}
     }
     @FXML void chats(){
 
@@ -58,7 +57,7 @@ public class MainFXML {
     @FXML void hoverPost(){new Pulse(postButton).play();}
 
     private void setDisplayTo(Parent root){
-        rootDisplay.getChildren().removeAll();
+        rootDisplay.getChildren().clear();
         rootDisplay.getChildren().add(root);
     }
 }

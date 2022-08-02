@@ -108,4 +108,7 @@ public class User {
         Database.Changer.removeFromBlockList(this.username, username);
         return true;
     }
+
+    @Override
+    public String toString(){return username;}
 }

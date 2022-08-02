@@ -20,7 +20,8 @@ public class Utility {
     UNKNOWN_USER_PICTURE = "unknown user.jpg",
     ICON_PATH = "instakilogram.png";
 
-    public static final int PREF_WIDTH = 900, PREF_HEIGHT = 600;
+    public static final int PREF_WIDTH = 900, PREF_HEIGHT = 600,
+    POST_TEXT_MARGIN_FROM_RIGHT = 40;
 
     public static void delay(long millis, Runnable continuation) {
         Task<Void> sleeper = new Task<>() {
