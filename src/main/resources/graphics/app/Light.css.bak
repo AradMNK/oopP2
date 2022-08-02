@@ -1216,27 +1216,27 @@
 .text-area {   
     -fx-background-color: transparent,#403f5c,rgb(236,238,241);
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 15;
+    -fx-background-radius: 0;
     -fx-padding: 1;
     -fx-prompt-text-fill: derive(white,-30%);
 }
 .text-area:hover {
     -fx-background-color: transparent,#403f5c,#e0dff2;
     -fx-background-insets: 0,1,2;
-    -fx-background-radius: 15;
+    -fx-background-radius: 0;
 }
 .text-area:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2;
     -fx-background-insets: -0.4, 1, 2;
-    -fx-background-radius: 15;    
+    -fx-background-radius: 0;    
 }
 .text-area .scroll-pane {
     -fx-background-color: transparent;
-	-fx-background-radius: 15; 
+	-fx-background-radius: 0; 
 }
 .text-area .content{
     -fx-background-color: white;
-	-fx-background-radius: 15; 
+	-fx-background-radius: 20; 
 }
 /*******************************************************************************
  *                                                                             *
