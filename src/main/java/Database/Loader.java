@@ -13,7 +13,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM users WHERE username = '" + username
                                                         + "' AND hashPass = '" + hashPass + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -27,9 +27,10 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT * FROM users WHERE username = '" + username + "';").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM users WHERE username = '" + username
+                                                        + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -46,7 +47,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM feed WHERE username = '" + username
                                                         +"' AND type = 'comment';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -63,7 +64,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM feed WHERE username = '" + username
                                                         +"' AND type = 'like';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -80,7 +81,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM feed WHERE username = '" + username
                                                         +"' AND type = 'post';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -94,9 +95,10 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT * FROM posts WHERE postID = " + postID + ";").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM posts WHERE postID = "
+                                                        + postID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -113,10 +115,10 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT COUNT(postID) FROM likes WHERE postID = " + postID
+            resultSet = connection.prepareStatement("SELECT COUNT(likeID) FROM likes WHERE postID = " + postID
                                                         + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfLikes = Integer.parseInt(resultSet.getString(1));
             }
@@ -136,10 +138,10 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT COUNT(postID) FROM likes WHERE postID = " + postID
+            resultSet = connection.prepareStatement("SELECT COUNT(username) FROM likes WHERE postID = " + postID
                                                         + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of likes
                 numberOfLikes = resultSet.getInt(1);
@@ -151,10 +153,11 @@ public class Loader {
                     //gets the likes
                     resultSet = connection.prepareStatement("SELECT username FROM likes WHERE postID = " + postID
                                                                 + ";").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < numberOfLikes; i++) {
-                        likerUsernames[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()){
+                            likerUsernames[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -165,7 +168,7 @@ public class Loader {
     }
 
     public static String getUserName (String username){
-        //declares the security question number
+        //declares the name
         String name = null;
 
         Connection connection = Connector.connector.connect();
@@ -174,7 +177,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT name FROM users WHERE username = '" + username
                                                         + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 name = resultSet.getString(1);
             }
@@ -194,7 +197,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT name, bio, subtitle, date, pfp, type FROM users WHERE username = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 for (int i = 0; i < 6; i++){
                     details[i] = resultSet.getString(i+1);
@@ -213,7 +216,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM posts WHERE postID = " + postID
                                                         + " AND type = 'business';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -233,7 +236,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(DISTINCT username) FROM views WHERE postID = " + postID
                                                         +";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 viewCount = resultSet.getInt(1);
             }
@@ -244,7 +247,7 @@ public class Loader {
     }
 
     public static int getNumberOfLikeStats(int postID) {
-        //declares the view count
+        //declares the like count
         int likeCount = 0;
 
         Connection connection = Connector.connector.connect();
@@ -253,7 +256,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(DISTINCT username) FROM likestat WHERE postID = " + postID
                                                         +";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 likeCount = resultSet.getInt(1);
             }
@@ -267,20 +270,12 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            //finds the messages username1 has sent to username2
-            resultSet = connection.prepareStatement("SELECT * FROM directmessages WHERE sender = '" + username1
-                                                        + "' AND receiver = '" + username2 + "';").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM directmessages WHERE (sender = '" + username1
+                                                        + "' AND receiver = '" + username2 + "') OR (sender = '"
+                                                        + username2 + "' AND receiver = '" + username1
+                                                        + "');").executeQuery();
 
-            //checks if the resultSet is empty
-            if (resultSet.next()){
-                return true;
-            }
-
-            //finds the messages username2 has sent to username1
-            resultSet = connection.prepareStatement("SELECT * FROM directmessages WHERE sender = '" + username2
-                                                        + "' AND receiver = '" + username1 + "';").executeQuery();
-
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -300,18 +295,14 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT message FROM directmessages WHERE messageID = "
                                                         + handle + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 message = resultSet.getString(1);
                 return message;
             }
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            Connector.connector.disconnect();
-        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
         return "message was deleted";
     }
 
@@ -322,7 +313,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM block WHERE blocker = '" + blocker
                                                         + "' and blocked ='" + blocked + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -339,14 +330,13 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM likes WHERE postID = " + postID
                                                         + " AND username = '" + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
         }
         catch (SQLException e) {e.printStackTrace();}
         finally {Connector.connector.disconnect();}
-
         return false;
     }
 
@@ -357,8 +347,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM follow WHERE follower = '" + follower
                                                         + "' AND followed = '" + followed + "';").executeQuery();
 
-            //checks if the resultSet is empty
-
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -379,7 +368,7 @@ public class Loader {
                                                         + " ON posts.postID = views.postID AND"
                                                         + " posts.username = '" + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 viewCount = resultSet.getInt(1);
             }
@@ -400,7 +389,7 @@ public class Loader {
                                                         + " ON posts.postID = likestat.postID AND"
                                                         + " posts.username = '" + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 likeCount = resultSet.getInt(1);
             }
@@ -411,15 +400,19 @@ public class Loader {
     }
 
     public static String getGroupMessageContent(int handle) {
+        //declares the message
+        String message;
+
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT message FROM groupmessages WHERE messageID = "
                                                         + handle +";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                return resultSet.getString(1);
+                message = resultSet.getString(1);
+                return message;
             }
         }
         catch (SQLException e) {e.printStackTrace();}
@@ -431,9 +424,9 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT * FROM group_chats WHERE groupIS = " + groupID + ";").executeQuery();
+            resultSet = connection.prepareStatement("SELECT * FROM group_chats WHERE groupID = " + groupID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -449,7 +442,7 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT * FROM group_chats WHERE joinID = '" + groupJoiner + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 return true;
             }
@@ -468,7 +461,7 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT username FROM posts WHERE postID = " + postID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 postPoster = resultSet.getString(1);
             }
@@ -485,15 +478,15 @@ public class Loader {
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT DISTINCT postID FROM likestat WHERE username = '" + username
+            resultSet = connection.prepareStatement("SELECT postID FROM likestat WHERE username = '" + username
                                                         + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                while (resultSet.next()){
+                do {
                     likedAds.add(resultSet.getInt(1));
-                    resultSet.next();
                 }
+                while (resultSet.next());
             }
         }
         catch (SQLException e) {e.printStackTrace();}
@@ -511,7 +504,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT groupID FROM group_chats WHERE joinID = '"
                                                         + joiner + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 groupID = resultSet.getInt(1);
             }
@@ -531,7 +524,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT questionID FROM users WHERE username = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 securityQuestionNumber = resultSet.getInt(1);
             }
@@ -548,7 +541,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT * FROM users WHERE username = '" + username
                                                         + "' AND answer = '" + answer + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 return true;
             }
@@ -571,7 +564,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(DISTINCT username) FROM unreadusers WHERE forUsername = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of likes
                 numberOfUsers = resultSet.getInt(1);
@@ -583,10 +576,11 @@ public class Loader {
                     //gets the likes
                     resultSet = connection.prepareStatement("SELECT DISTINCT username FROM unreadusers WHERE forUsername = '"
                                                                 + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < numberOfUsers; i++) {
-                        unreadUsers[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()){
+                            unreadUsers[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -609,7 +603,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(DISTINCT groupID) FROM unreadgroups WHERE forUsername = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of likes
                 numberOfGroups = resultSet.getInt(1);
@@ -621,10 +615,11 @@ public class Loader {
                     //gets the likes
                     resultSet = connection.prepareStatement("SELECT DISTINCT groupID FROM unreadgroups WHERE forUsername = '"
                                                                 + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < numberOfGroups; i++) {
-                        unreadGroups[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            unreadGroups[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -644,7 +639,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT count FROM unreadusers WHERE forUsername = '"
                                                         + forUsername + "' AND username = '" + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 count = resultSet.getInt(1);
             }
@@ -664,7 +659,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT count FROM unreadgroups WHERE forUsername = '"
                                                         + forUsername + "' AND groupID = " + groupID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 count = resultSet.getInt(1);
             }
@@ -687,7 +682,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(blocked) FROM block WHERE blocker = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of blocked users
                 blockedCount = resultSet.getInt(1);
@@ -699,10 +694,11 @@ public class Loader {
                     //gets the usernames
                     resultSet = connection.prepareStatement("SELECT blocked FROM block WHERE blocker = '"
                                                                 + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < blockedCount; i++) {
-                        blockList[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            blockList[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -725,7 +721,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(follower) FROM follow WHERE followed = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of followers
                 followerCount = resultSet.getInt(1);
@@ -737,10 +733,11 @@ public class Loader {
                     //gets the usernames
                     resultSet = connection.prepareStatement("SELECT follower FROM follow WHERE followed = '"
                                                                 + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < followerCount; i++) {
-                        followers[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            followers[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -763,7 +760,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(followed) FROM follow WHERE follower = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of followings
                 followingCount = resultSet.getInt(1);
@@ -775,10 +772,11 @@ public class Loader {
                     //gets the usernames
                     resultSet = connection.prepareStatement("SELECT followed FROM follow WHERE follower = '"
                                                                  + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < followingCount; i++) {
-                        followings[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            followings[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -801,7 +799,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(postID) FROM posts WHERE username = '"
                                                         + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of posts
                 postCount = resultSet.getInt(1);
@@ -813,10 +811,11 @@ public class Loader {
                     //gets the postIDs
                     resultSet = connection.prepareStatement("SELECT postID FROM posts WHERE username = '"
                                                                 + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < postCount; i++) {
-                        posts[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            posts[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -840,7 +839,7 @@ public class Loader {
                                                         + username + ",%' OR '%," + username + "' OR '%,"
                                                         + username + ",%'" + " OR '" + username + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 //gets the number of groups
                 groupCount = resultSet.getInt(1);
@@ -853,10 +852,11 @@ public class Loader {
                     resultSet = connection.prepareStatement("SELECT COUNT(groupID) FROM group_chats WHERE members LIKE '"
                                                                 + username + ",%' OR '%," + username + "' OR '%,"
                                                                 + username + ",%'" + "OR '" + username + "';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < groupCount; i++) {
-                        groups[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            groups[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -876,7 +876,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT username, postID, comment, date FROM comments WHERE commentID = "
                                                         + commentID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 for (int i = 0; i < 4; i++){
                     details[i] = resultSet.getString(i+1);
@@ -898,7 +898,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT username, description, date, type FROM posts WHERE postID = "
                                                         + postID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 for (int i = 0; i < 4; i++){
                     details[i] = resultSet.getString(i+1);
@@ -925,25 +925,26 @@ public class Loader {
                                                         + username2 + "' AND receiver = '" + username1
                                                         + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfResults = resultSet.getInt(1);
 
-                //checks if the resultSet is empty
+                //checks if the resultSet isn't empty
                 if (resultSet.getInt(1) != 0) {
                     //declares the array
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
                     resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE ((sender = '"
-                            + username1 + "' AND receiver = '" + username2 + "') OR (sender = '"
-                            + username2 + "' AND receiver = '" + username1
-                            + "')) AND message LIKE '%" + pattern + "%';").executeQuery();
+                                                                + username1 + "' AND receiver = '" + username2
+                                                                + "') OR (sender = '" + username2 + "' AND receiver = '"
+                                                                + username1 + "')) AND message LIKE '%" + pattern
+                                                                + "%';").executeQuery();
 
-                    resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
-                        messageIDs[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            messageIDs[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -966,12 +967,12 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(messageID) FROM groupmessages WHERE groupID = "
                                                         + groupID + " AND (members LIKE '" + username + ",%' OR '%,"
                                                         + username + "' OR '%," + username + ",%'" + "OR '" + username
-                                                        + "') AND message LIKE '%" + pattern + "'%;").executeQuery();
-            //checks if the resultSet is empty
+                                                        + "') AND message LIKE '%" + pattern + "%';").executeQuery();
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfResults = resultSet.getInt(1);
 
-                //checks if the resultSet is empty
+                //checks if the resultSet isn't empty
                 if (resultSet.getInt(1) != 0) {
                     //declares the array
                     messageIDs = new int[numberOfResults];
@@ -981,12 +982,12 @@ public class Loader {
                                                                 + groupID + " AND (members LIKE '" + username
                                                                 + ",%' OR '%," + username + "' OR '%," + username + ",%'"
                                                                 + "OR '" + username + "') AND message LIKE '%" + pattern
-                                                                + "'%;").executeQuery();
+                                                                + "%';").executeQuery();
 
-                    resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
-                        messageIDs[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            messageIDs[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1010,11 +1011,11 @@ public class Loader {
                                                         + username + "' OR receiver = '" + username
                                                         + "') AND message LIKE '%" + pattern + "%';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfResults = resultSet.getInt(1);
 
-                //checks if the resultSet is empty
+                //checks if the resultSet isn't empty
                 if (resultSet.getInt(1) != 0) {
                     //declares the array
                     messageIDs = new int[numberOfResults];
@@ -1024,10 +1025,10 @@ public class Loader {
                                                                 + username + "' OR receiver = '" + username
                                                                 + "') AND message LIKE '%" + pattern + "%';").executeQuery();
 
-                    resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
-                        messageIDs[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            messageIDs[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1054,25 +1055,27 @@ public class Loader {
                                                         + "') AND groupmessage.message LIKE '%" + pattern
                                                         + "%';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfResults = resultSet.getInt(1);
 
-                //checks if the resultSet is empty
+                //checks if the resultSet isn't empty
                 if (resultSet.getInt(1) != 0) {
                     //declares the array
                     messageIDs = new int[numberOfResults];
 
                     //adds the IDs to the array
-                    resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM group_chats INNER JOIN "
-                                                                + "groupmessages ON group_chats.groupID = groupmessages.groupID "
-                                                                + "WHERE groupmessage.message LIKE '%" + pattern
+                    resultSet = connection.prepareStatement("SELECT groupmessages.messageID FROM group_chats "
+                                                                + "INNER JOIN groupmessages ON group_chats.groupID = groupmessages.groupID "
+                                                                + "WHERE (group_chats.members LIKE '" + username + ",%' OR '%,"
+                                                                + username + "' OR '%," + username + ",%'" + "OR '" + username
+                                                                + "') AND groupmessage.message LIKE '%" + pattern
                                                                 + "%';").executeQuery();
 
-                    resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
-                        messageIDs[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            messageIDs[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1095,11 +1098,11 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(username) FROM users WHERE username LIKE '%"
                                                         + pattern + "%' OR name LIKE '%" + pattern + "%';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()) {
                 numberOfResults = resultSet.getInt(1);
 
-                //checks if the resultSet is empty
+                //checks if the resultSet isn't empty
                 if (numberOfResults != 0) {
                     //declares the array
                     users = new String[numberOfResults];
@@ -1109,10 +1112,10 @@ public class Loader {
                                                                 + pattern + "%' OR name LIKE '%"
                                                                 + pattern + "%';").executeQuery();
 
-                    resultSet.next();
                     for (int i = 0; i < numberOfResults; i++) {
-                        users[i] = resultSet.getString(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            users[i] = resultSet.getString(1);
+                        }
                     }
                 }
             }
@@ -1135,7 +1138,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(commentID) FROM comments WHERE postID = "
                                                         + postID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 commentCount = resultSet.getInt(1);
 
@@ -1146,10 +1149,11 @@ public class Loader {
                     //saves the comments
                     resultSet = connection.prepareStatement("SELECT commentID FROM comments WHERE postID = "
                                                                 + postID + ";").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < commentCount; i++){
-                        comments[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            comments[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1162,6 +1166,7 @@ public class Loader {
     public static String getGroupJoiner(int groupID) {
         //declares the group joiner
         String joiner = "";
+
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
@@ -1180,13 +1185,14 @@ public class Loader {
     public static String getGroupOwner(int groupID) {
         //declares the group owner
         String owner = "";
+
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
             resultSet = connection.prepareStatement("SELECT admin FROM group_chats WHERE groupID = "
                                                         + groupID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 owner = resultSet.getString(1);
             }
@@ -1207,7 +1213,7 @@ public class Loader {
                                                         + groupID + " ORDER BY messageID DESC LIMIT "
                                                         + howMany + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 for (int i = howMany - 1; i >= 0; i--){
                     messageIDs[i] = resultSet.getInt(1);
@@ -1229,11 +1235,11 @@ public class Loader {
         try {
             resultSet = connection.prepareStatement("SELECT messageID FROM directmessages WHERE (sender = '"
                                                         + username1 + "' AND receiver = '" + username2
-                                                        + "') OR (sender = '" + username1 + "' AND receiver = '"
-                                                        + username2 + "') ORDER BY messageID DESC LIMIT "
+                                                        + "') OR (sender = '" + username2 + "' AND receiver = '"
+                                                        + username1 + "') ORDER BY messageID DESC LIMIT "
                                                         + howMany + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 for (int i = howMany - 1; i >= 0; i--){
                     messageIDs[i] = resultSet.getInt(1);
@@ -1248,18 +1254,18 @@ public class Loader {
 
     public static String[] getGroupMessageDetails(int groupMessageID) {
         //declares a string array to store the details
-        String[] details = new String[5];
+        String[] details = new String[6];
 
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT groupID, sender, message, date, originalSender "
+            resultSet = connection.prepareStatement("SELECT groupID, sender, message, date, replyMessageID, originalSender "
                                                         + "FROM users WHERE messageID = " + groupMessageID
                                                         + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                for (int i = 0; i < 5; i++){
+                for (int i = 0; i < 6; i++){
                     details[i] = resultSet.getString(i+1);
                 }
             }
@@ -1271,18 +1277,18 @@ public class Loader {
 
     public static String[] getMessageDetails(int messageID) {
         //declares a string array to store the details
-        String[] details = new String[5];
+        String[] details = new String[6];
 
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT sender, receiver, message, date, originalSender " +
+            resultSet = connection.prepareStatement("SELECT sender, receiver, message, date, replyMessageID, originalSender " +
                                                         "FROM directmessages WHERE messageID = " + messageID
                                                         + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                for (int i = 0; i < 5; i++){
+                for (int i = 0; i < 6; i++){
                     details[i] = resultSet.getString(i+1);
                 }
             }
@@ -1305,7 +1311,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
                                                         + "' AND type = 'post';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 postCount = resultSet.getInt(1);
 
@@ -1316,10 +1322,11 @@ public class Loader {
                     //saves the posts
                     resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
                                                                 + "' AND type = 'post';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < postCount; i++){
-                        posts[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            posts[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1342,7 +1349,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
                                                         + "' AND type = 'like';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 likeCount = resultSet.getInt(1);
 
@@ -1352,11 +1359,12 @@ public class Loader {
 
                     //saves the posts
                     resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
-                            +                                    "' AND type = 'like';").executeQuery();
-                    resultSet.next();
+                                                                + "' AND type = 'like';").executeQuery();
+
                     for (int i = 0; i < likeCount; i++){
-                        likes[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            likes[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
@@ -1379,7 +1387,7 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT COUNT(ID) FROM feed WHERE username = '" + username
                                                         + "' AND type = 'comment';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
                 commentCount = resultSet.getInt(1);
 
@@ -1390,10 +1398,11 @@ public class Loader {
                     //saves the posts
                     resultSet = connection.prepareStatement("SELECT ID FROM feed WHERE username = '" + username
                                                                 + "' AND type = 'comment';").executeQuery();
-                    resultSet.next();
+
                     for (int i = 0; i < commentCount; i++){
-                        comments[i] = resultSet.getInt(1);
-                        resultSet.next();
+                        if (resultSet.next()) {
+                            comments[i] = resultSet.getInt(1);
+                        }
                     }
                 }
             }
