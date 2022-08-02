@@ -1231,11 +1231,11 @@
     -fx-background-radius: 0;    
 }
 .text-area .scroll-pane {
-    -fx-background-color: transparent;
+    -fx-background-color: black;
 	-fx-background-radius: 15; 
 }
 .text-area .content{
-    -fx-background-color: white;
+    -fx-background-color: white, white;
 	-fx-background-radius: 20; 
 }
 /*******************************************************************************

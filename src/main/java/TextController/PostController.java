@@ -23,7 +23,7 @@ public class PostController {
     }
 
     private static String message(){
-        TextController.println("Write your post and type /" + CommandType.POST + "at the start of a new line to post.");
+        TextController.println("Write your post and type /" + CommandType.POST + " at the start of a new line to post.");
 
         StringBuilder stringBuilder = new StringBuilder();
         String line = TextController.getLine();
