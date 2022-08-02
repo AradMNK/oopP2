@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import org.controlsfx.control.Notifications;
 
 import java.net.MalformedURLException;
 
@@ -37,5 +38,11 @@ public class PostmakerFXML {
 
         if (picturePath.equals("")) Loginner.loginnedUser.post(inputMessage.getText());
         else Loginner.loginnedUser.post(inputMessage.getText(), picturePath);
+
+        Notifications notification = Notifications.create();
+        notification.title("Success!");
+        notification.text("Successfully posted your post!");
+        notification.showInformation();
+        cancel();
     }
 }

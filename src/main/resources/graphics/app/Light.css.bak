@@ -889,12 +889,12 @@
 *                                                                              *
 *******************************************************************************/
 .scroll-pane {    
-    -fx-background-color: transparent, #403f5c, #5e5985;
+    -fx-background-color: transparent, #5e5985, #c1c5d4;
     -fx-background-insets: 0,0,1;
-    -fx-padding: 2;    
+    -fx-padding: 20;    
 }
 .scroll-pane:focused {
-    -fx-background-color:  #403f5c,  #403f5c, #5e5985;    
+    -fx-background-color:  #403f5c,  #5e5985, #c1c5d4;
     -fx-background-insets: -1.4, 0, 1;
 }
 .scroll-pane .corner {
@@ -1187,18 +1187,18 @@
     -fx-background-insets: 0, 1, 2;
 	-fx-font-size: 200%;
     -fx-padding: 3 5 3 5;    
-	-fx-background-radius: 15;
+	-fx-background-radius: 0;
     -fx-prompt-text-fill: #c6bad4;
 }
 .text-field:hover {
     -fx-background-color: transparent,#403f5c,#e0dff2;
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 15;
+    -fx-background-radius: 0;
 }
 .text-field:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2;
     -fx-background-insets: -0.4, 1, 2;
-    -fx-background-radius: 15;    
+    -fx-background-radius: 0;    
 }
 /*******************************************************************************
  *                                                                             *
@@ -1216,14 +1216,14 @@
 .text-area {   
     -fx-background-color: transparent,#403f5c,rgb(236,238,241);
     -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 15;
-    -fx-padding: 1;
+    -fx-background-radius: 0;
+    -fx-padding: 2;
     -fx-prompt-text-fill: derive(white,-30%);
 }
 .text-area:hover {
-    -fx-background-color: transparent,#403f5c,#e0dff2;
+    -fx-background-color: transparent,#403f5c,rgb(236,238,241);
     -fx-background-insets: 0,1,2;
-    -fx-background-radius: 15;
+    -fx-background-radius: 0;
 }
 .text-area:focused {
     -fx-background-color: #403f5c,#403f5c,#e0dff2;
@@ -1820,9 +1820,10 @@
  ******************************************************************************/
  .label{
 	 -fx-text-fill: #354259;
-	 -fx-background-radius: 15;
+	 -fx-background-radius: 3;
 	 -fx-background-insets: 1, 2;
-	 -fx-background-color: #23212b, #D6EFED;
+	 -fx-background-color: #23212b, #d3dceb;
+	 -fx-padding: 1;
  }
  /*******************************************************************************
  *                                                                             *
