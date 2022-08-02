@@ -1168,7 +1168,6 @@ public class Loader {
             resultSet = connection.prepareStatement("SELECT joinID FROM group_chats WHERE groupID = "
                                                         + groupID + ";").executeQuery();
 
-            //checks if the resultSet is empty
             if (resultSet.next()){
                 joiner = resultSet.getString(1);
             }
