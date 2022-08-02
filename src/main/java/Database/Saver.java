@@ -16,22 +16,6 @@ public class Saver {
                         + securityQuestionNum + ", '" + securityQuestionAnswer + "', '" + userType + "');");
     }
 
-    public static void setUserName(String username, String value) {
-        Connector.queryWithoutResult
-                ("UPDATE users SET name = '" + value + "' WHERE username = '" + username + "';");
-    }
-
-    public static void setUserBio(String username, String value) {
-        Connector.queryWithoutResult
-                ("UPDATE users SET bio = '" + value + "' WHERE username = '" + username + "';");
-    }
-
-    public static void setUserSubtitle(String username, String value) {
-        Connector.queryWithoutResult
-                ("UPDATE users SET subtitle = '" + value + "' WHERE username = '" + username + "';");
-    }
-
-
     public static int addToPosts(String username, LocalDateTime now, String description, String postType) {
         //declares the postID
         int postID = 0;
@@ -213,7 +197,7 @@ public class Saver {
                 //splits the members and adds the new message
                 String[] members = membersList.split("");
                 for (int i = 0; i < members.length; i++){
-                    Saver.AddGroupMessageToUnreadMessages(handle, members[i]);
+                    Saver.addGroupMessageToUnreadMessages(handle, members[i]);
                 }
             }
         }
@@ -221,7 +205,7 @@ public class Saver {
         finally {Connector.connector.disconnect();}
     }
 
-    public static void AddGroupMessageToUnreadMessages (int groupID, String username){
+    public static void addGroupMessageToUnreadMessages(int groupID, String username){
         //declares new message count
         int newMessages;
 

@@ -78,10 +78,6 @@
             <Font name="System Italic" size="11.815384864807129" />
          </font></Text>
       <Text fx:id="username" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="\@username" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-      <Text fx:id="date" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="date" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font name="AgeoPersonalUse-Regular" size="11.815384864807129" />
-         </font>
-      </Text>
+      <Text fx:id="date" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="date" textAlignment="CENTER" underline="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

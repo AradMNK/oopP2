@@ -177,4 +177,25 @@ public class Changer {
         Connector.queryWithoutResult("DELETE FROM unreadusers WHERE forUsername = '"
                                             + forUsername + "' AND username = '" + usernameSender +"';");
     }
+
+    public static void setUserPfp(String username, String directory) {
+        Connector.queryWithoutResult
+                ("UPDATE users SET pfp = '" + directory + "' WHERE username = '" + username + "';");
+    }
+
+    public static void setUserName(String username, String value) {
+        Connector.queryWithoutResult
+                ("UPDATE users SET name = '" + value + "' WHERE username = '" + username + "';");
+    }
+
+    public static void setUserBio(String username, String value) {
+        Connector.queryWithoutResult
+                ("UPDATE users SET bio = '" + value + "' WHERE username = '" + username + "';");
+    }
+
+    public static void setUserSubtitle(String username, String value) {
+        Connector.queryWithoutResult
+                ("UPDATE users SET subtitle = '" + value + "' WHERE username = '" + username + "';");
+    }
+
 }

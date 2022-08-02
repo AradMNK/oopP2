@@ -24,8 +24,8 @@ public class UserEditor {
 
     private static void setUserByTag(String username, String tag, String value) {
         switch (tag){
-            case "bio" -> Database.Saver.setUserBio(username, value);
-            case "sub" -> Database.Saver.setUserSubtitle(username, value);
+            case "bio" -> Database.Changer.setUserBio(username, value);
+            case "sub" -> Database.Changer.setUserSubtitle(username, value);
         }
     }
 }
