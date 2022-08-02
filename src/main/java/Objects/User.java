@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class User {
     private String name, username, subtitle, bio;
-    private Handle pfp, theme;
+    private Handle pfp;
     private Feed feed;
     private final HashSet<Post> posts = new HashSet<>();
     private Set<String> blocklist = new HashSet<>(), followers = new HashSet<>(), followings = new HashSet<>();
@@ -28,9 +28,6 @@ public class User {
 
     public Handle getPfp() {return pfp;}
     public void setPfp(Handle pfp) {this.pfp = pfp;}
-
-    public Handle getTheme() {return theme;}
-    public void setTheme(Handle theme) {this.theme = theme;}
 
     public HashSet<Post> getPosts() {return posts;}
     public Set<String> getBlocklist() {return blocklist;}

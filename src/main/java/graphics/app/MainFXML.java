@@ -13,7 +13,8 @@ import java.io.IOException;
 
 public class MainFXML {
     @FXML Pane rootDisplay;
-    @FXML Button homeButton, myAccountButton, chatsButton, feedButton, exploreButton, blocklistButton, postButton, searchButton;
+    @FXML Button homeButton, myAccountButton, chatsButton, feedButton, exploreButton,
+            blocklistButton, postButton, searchButton, themeButton;
     @FXML TextField searchField;
 
     public void initialize(){
@@ -45,6 +46,9 @@ public class MainFXML {
     @FXML void post(){
 
     }
+    @FXML void theme(){
+
+    }
 
     @FXML void hoverSearchButton(){new Pulse(searchButton).play();}
     @FXML void hoverSearchField(){new Pulse(searchField).play();}
@@ -55,6 +59,7 @@ public class MainFXML {
     @FXML void hoverExplore(){new Pulse(exploreButton).play();}
     @FXML void hoverBlocklist(){new Pulse(blocklistButton).play();}
     @FXML void hoverPost(){new Pulse(postButton).play();}
+    @FXML void hoverTheme(){new Pulse(themeButton).play();}
 
     private void setDisplayTo(Parent root){
         rootDisplay.getChildren().clear();
