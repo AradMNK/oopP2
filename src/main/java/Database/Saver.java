@@ -228,4 +228,36 @@ public class Saver {
         catch (SQLException e) {e.printStackTrace();}
         finally {Connector.connector.disconnect();}
     }
+
+    public static int addToPosts(String username, LocalDateTime now,
+                                 String description, String postType, String mediaID) {
+        //declares the postID
+        int postID = 0;
+
+        //formats date and time
+        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = now.format(formatObj);
+
+        //adds the post to the posts
+        Connector.queryWithoutResult
+                ("INSERT INTO posts (username, description, mediaID, date, type) VALUES ('"
+                        + username +"', '" + description + "', '" + mediaID + "', '" + formattedDate + "', '"
+                        + postType + "');");
+
+        //gets the handle
+        Connection connection = Connector.connector.connect();
+        ResultSet resultSet;
+        try {
+            resultSet = connection.prepareStatement
+                    ("SELECT postID FROM posts ORDER BY postID DESC;").executeQuery();
+
+            //checks if the resultSet isn't empty
+            if (resultSet.next()){
+                postID = resultSet.getInt(1);
+            }
+        }
+        catch (SQLException e) {e.printStackTrace();}
+        finally {Connector.connector.disconnect();}
+        return postID;
+    }
 }
