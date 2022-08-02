@@ -890,17 +890,17 @@ public class Loader {
 
     public static String[] getPostDetails(int postID) {
         //declares a string array to store the details
-        String[] details = new String[4];
+        String[] details = new String[5];
 
         Connection connection = Connector.connector.connect();
         ResultSet resultSet;
         try {
-            resultSet = connection.prepareStatement("SELECT username, description, date, type FROM posts WHERE postID = "
+            resultSet = connection.prepareStatement("SELECT username, description, mediaID, date, type FROM posts WHERE postID = "
                                                         + postID + ";").executeQuery();
 
             //checks if the resultSet isn't empty
             if (resultSet.next()){
-                for (int i = 0; i < 4; i++){
+                for (int i = 0; i < 5; i++){
                     details[i] = resultSet.getString(i+1);
                 }
             }
