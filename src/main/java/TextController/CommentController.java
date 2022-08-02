@@ -27,6 +27,9 @@ public class CommentController {
         }
 
         user.comment(postID, message);
+
+        TextController.println("Commented! Preview:");
+        TextController.println(message);
     }
 
     private static String message(){
