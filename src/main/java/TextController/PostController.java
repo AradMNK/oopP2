@@ -20,6 +20,9 @@ public class PostController {
         }
 
         user.post(message);
+
+        TextController.println("Posted! Preview:");
+        TextController.println(message);
     }
 
     private static String message(){
