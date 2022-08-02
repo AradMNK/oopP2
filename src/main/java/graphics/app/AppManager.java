@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class AppManager {
-    static Stage loginStage, mainStage;
+    static Stage loginStage, mainStage = null;
 
     public static void launchLogin(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.LOGIN_FXML_PATH));
@@ -54,24 +54,31 @@ public class AppManager {
         ((ForgotPasswordFXML)fxmlLoader.getController()).initialize(loginStage.getScene().getRoot());
     }
 
-    public static void launchMain() throws IOException {
+    public static void launchMain(String themePath){
         loginStage.close(); //closing login stage
+        if (mainStage != null) mainStage.close();
 
         mainStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(Utility.MAIN_FXML_PATH));
-        Scene scene = new Scene(fxmlLoader.load(), Utility.PREF_WIDTH, Utility.PREF_HEIGHT);
-        scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource
-                (Utility.LIGHT_MODE_CSS_PATH)).toString());
-        mainStage.setTitle(Utility.APP_TITLE);
-        mainStage.getIcons().add(new Image(Objects.requireNonNull(Launcher.class.getResource
-                (Utility.ICON_PATH)).toString()));
-        mainStage.setScene(scene);
-        mainStage.setMaximized(true);
+        Scene scene;
+        try {
+            scene = new Scene(fxmlLoader.load(), Utility.PREF_WIDTH, Utility.PREF_HEIGHT);
+            scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource
+                    (themePath)).toString());
+            mainStage.setTitle(Utility.APP_TITLE);
+            mainStage.getIcons().add(new Image(Objects.requireNonNull(Launcher.class.getResource
+                    (Utility.ICON_PATH)).toString()));
+            mainStage.setScene(scene);
+            mainStage.setMaximized(true);
 
-        mainStage.show();
-        ((MainFXML)fxmlLoader.getController()).initialize();
-        mainStage.requestFocus();
-        mainStage.show();
+            mainStage.show();
+            ((MainFXML)fxmlLoader.getController()).initialize();
+            mainStage.requestFocus();
+            mainStage.show();
+        } catch (IOException e) {
+            AppManager.alert(Alert.AlertType.ERROR, "Exception occurred.",
+                    e.getClass().toString(), "Exception");
+            e.printStackTrace();}
     }
 
 
