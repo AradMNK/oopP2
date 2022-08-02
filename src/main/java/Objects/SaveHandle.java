@@ -14,4 +14,7 @@ public class SaveHandle{
         if (!o.getClass().equals(SaveHandle.class)) return false;
         return (((SaveHandle) o).handle == handle);
     }
+
+    @Override
+    public String toString(){return Integer.toString(handle);}
 }
