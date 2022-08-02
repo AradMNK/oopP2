@@ -13,6 +13,7 @@ public class Utility {
     MAIN_FXML_PATH = "Main.fxml",
     MY_ACCOUNT_FXML_PATH = "My Account.fxml",
     POST_FXML_PATH = "Post.fxml",
+    POSTMAKER_FXML_PATH = "Postmaker.fxml",
 
     LIGHT_MODE_CSS_PATH = "Light.css",
     DARK_MODE_CSS_PATH = "Dark.css",

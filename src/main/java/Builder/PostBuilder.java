@@ -3,6 +3,7 @@ package Builder;
 import Database.Loader;
 import Objects.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class PostBuilder {
     public static Post getPostFromDatabase(int postID) {
@@ -32,13 +33,16 @@ public class PostBuilder {
         Post post;
         String[] details = Loader.getPostDetails(postID);
 
-        if (details[3].equals(UserType.BUSINESS.toString())) post = new BusinessPost();
+        if (details[details.length - 1].equals(UserType.BUSINESS.toString())) post = new BusinessPost();
         else post = new Post();
 
         post.setPoster(UserBuilder.getUserFromDatabase(details[0]));
         post.setPostID(new SaveHandle(postID));
         post.setDescription(details[1]);
-        post.setDatePosted(LocalDateTime.parse(details[2]));
+        post.setDatePosted(LocalDateTime.parse(details[3], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        String nullable = details[2];
+        if (nullable == null) nullable = "";
+        post.setPicture(new Handle(nullable));
 
         return post;
     }

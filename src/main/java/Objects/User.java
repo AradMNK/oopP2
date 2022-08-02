@@ -108,4 +108,8 @@ public class User {
 
     @Override
     public String toString(){return username;}
+
+    public void post(String text, String picturePath) {
+
+    }
 }
