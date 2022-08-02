@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 public class Changer {
     public static void removePostFromFeed(String username, int postID) {
-        Connector.queryWithoutResult("DELETE FROM feed WHERE username = '" + username + "' AND postID = " + postID + " AND type = 'post';");
+        Connector.queryWithoutResult("DELETE FROM feed WHERE username = '" + username + "' AND postID = "
+                                            + postID + " AND type = 'post';");
     }
 
     public static void removeCommentFromFeed(String username, int commentID) {
@@ -77,9 +78,8 @@ public class Changer {
         try {
             resultSet = connection.prepareStatement("SELECT members FROM groups WHERE groupID = " + handle + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 members = resultSet.getString(1);
 
                 //adds the member to the group
@@ -102,9 +102,8 @@ public class Changer {
         try {
             resultSet = connection.prepareStatement("SELECT members FROM groups WHERE groupID = " + handle + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 members = resultSet.getString(1);
 
                 //removes the user
@@ -138,9 +137,8 @@ public class Changer {
         try {
             resultSet = connection.prepareStatement("SELECT banList FROM groups WHERE groupID = " + handle + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 banned = resultSet.getString(1);
 
                 //removes the user

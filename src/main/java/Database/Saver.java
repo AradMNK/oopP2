@@ -36,9 +36,8 @@ public class Saver {
             resultSet = connection.prepareStatement
                     ("SELECT postID FROM posts ORDER BY postID DESC;").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 postID = resultSet.getInt(1);
             }
         }
@@ -66,9 +65,8 @@ public class Saver {
         try {
             resultSet = connection.prepareStatement("SELECT commentID FROM comments ORDER BY commentID DESC;").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 commentID = resultSet.getInt(1);
             }
         }
@@ -125,9 +123,8 @@ public class Saver {
             resultSet = connection.prepareStatement("SELECT count FROM unreadusers WHERE forUsername = '"
                                                         + receiver + "' AND username = '" + sender + "';").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 newMessages = resultSet.getInt(1);
                 newMessages ++;
                 Connector.queryWithoutResult("UPDATE unreadusers SET count = " + newMessages
@@ -159,9 +156,8 @@ public class Saver {
         try {
             resultSet = connection.prepareStatement("SELECT groupID FROM groups ORDER BY groupID DESC;").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 groupID = resultSet.getInt(1);
             }
         }
@@ -190,11 +186,11 @@ public class Saver {
             resultSet = connection.prepareStatement("SELECT members FROM groups WHERE groupID = "
                                                         + handle + ";").executeQuery();
 
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 membersList = resultSet.getString(1);
 
-                //splits the members and adds the new message
+                //splits the messages and adds the new message
                 String[] members = membersList.split("");
                 for (int i = 0; i < members.length; i++){
                     Saver.addGroupMessageToUnreadMessages(handle, members[i]);
@@ -215,9 +211,8 @@ public class Saver {
             resultSet = connection.prepareStatement("SELECT count FROM unreadgroups WHERE forUsername = '"
                                                         + username + "' AND groupID = " + groupID + ";").executeQuery();
 
-            //checks if the resultSet is empty
+            //checks if the resultSet isn't empty
             if (resultSet.next()){
-                resultSet.next();
                 newMessages = resultSet.getInt(1);
                 newMessages ++;
                 Connector.queryWithoutResult("UPDATE unreadgroups SET count = " + newMessages
