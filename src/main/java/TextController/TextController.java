@@ -111,7 +111,7 @@ public class TextController {
         println("/" + CommandType.CREATE_ACC + " (username) (password) (name)");
         println("Use this to create an account.");
         println("/" + CommandType.EDIT_ACC);
-        println("Use this to edit your account. You will have to write its tags like bio=i am sad and in the next line subtitle=hello there, for example.");
+        println("Use this to edit your account. You will have to write its tags like bio=i am sad and in the next line sub=hello and/or name=my name there, for example.");
         println("/" + CommandType.RELOAD);
         println("Reloads you as the user with the same credentials if something isn't loading properly.");
         println("/" + CommandType.FEED);
@@ -364,8 +364,10 @@ public class TextController {
     }
 
     public static void inputCommand(){
-        Command command;
+        println("Successfully launched terminal mode.");
 
+        Command command;
+        println("Enter a new command:");
         String line = getLine();
         try{command = new Command(line);}
         catch (CommandException e){
@@ -376,15 +378,14 @@ public class TextController {
         }
 
         while (!command.getCommandType().equals(CommandType.EXIT)){
-            if (!line.equals("")) actOnCommand(command);
+            actOnCommand(command);
             println("Enter a new command:");
             try {line = getLine(); if (!line.equals("")) command = new Command(line);}
             catch (CommandException e){
                 TextController.println("What you just typed in was not defined." +
                         "\nUse /" + CommandType.HELP + " to see the available commands.");
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e){
-                TextController.println("Argument problem. Please try again.");
-            }
+                TextController.println("Argument problem. Please try again.");}
         }
     }
 

@@ -19,7 +19,7 @@ public class Display {
         User user;
         if (args.length > 0){
             if (Database.Loader.usernameExists(args[0])){
-                TextController.println("User was not found in database. Try using a different username.");
+                TextController.println("User @" + args[0] + " not found in database. Try using a different username.");
                 return;
             }
 
@@ -28,7 +28,7 @@ public class Display {
         }
         else user = Loginner.loginnedUser;
 
-        TextController.println(user.getName() + " (" + args[0] + ")");
+        TextController.println(user.getName() + " (" + user.getUsername() + ")");
         String out = user.getSubtitle();
         if (!out.equals("")) TextController.println(out);
 
