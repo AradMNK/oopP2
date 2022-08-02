@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane minHeight="100.0" minWidth="150.0" prefHeight="600.0" prefWidth="900.0" vgap="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.app.MainFXML">
+<GridPane minHeight="100.0" minWidth="150.0" prefHeight="756.0" prefWidth="998.0" vgap="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.app.MainFXML">
    <columnConstraints>
       <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" percentWidth="27.0" />
       <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" percentWidth="73.0" />
@@ -59,6 +59,18 @@
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/Home.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="themeButton" alignment="TOP_LEFT" graphicTextGap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#theme" onMouseEntered="#hoverTheme" styleClass="icon-button" text="Theme" textOverrun="CLIP">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Icons/Theme.png" />
                      </image>
                      <viewport>
                         <Rectangle2D />
