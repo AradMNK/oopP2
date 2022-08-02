@@ -21,7 +21,7 @@ public class Saver {
         int postID = 0;
 
         //formats date and time
-        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDate = now.format(formatObj);
 
         //adds the post to the posts
@@ -51,7 +51,7 @@ public class Saver {
         int commentID = 0;
 
         //formats date and time
-        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDate = now.format(formatObj);
 
         //adds the comment to the comments
@@ -105,7 +105,7 @@ public class Saver {
     public static void addToMessages(String sender, String receiver, String originalSender,
                                      LocalDateTime now, String line, int replyMsgID) {
         //formats date and time
-        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDate = now.format(formatObj);
 
         Connector.queryWithoutResult("INSERT INTO directmessages (sender, receiver, message, date"
@@ -169,7 +169,7 @@ public class Saver {
     public static void addToGroupMessages(int handle, String sender, String originalSender,
                                           LocalDateTime now, String content, int notReplyID) {
         //formats date and time
-        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDate = now.format(formatObj);
 
         Connector.queryWithoutResult("INSERT INTO groupmessages (groupID, sender, message, date"
